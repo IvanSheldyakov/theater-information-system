@@ -97,3 +97,114 @@ select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.payment
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
 where e.payment = '$10000';
+
+
+--2
+
+--число спектаклей в репе
+select count(*) from theatre.repertoire;
+
+--список спектаклей в репе
+select  p.name
+from theatre.repertoire as r, theatre.play as p
+where r.play = p.id;
+
+-- сыгранные спектакли
+select  p.name
+from theatre.repertoire as r, theatre.play as p
+where r.play = p.id and r.date < current_date;
+
+--указаннго жанра
+select  p.name
+from theatre.repertoire as r, theatre.play as p, theatre.genre as g
+where r.play = p.id and p.genre = g.id and g.name = 'музыкальная комедия';
+
+--все спектакли театра
+select p.name from theatre.play as p;
+
+--все спектакли в репе за указанный период
+select p.name
+from theatre.repertoire as r, theatre.play as p
+where r.play = p.id and r.date between '01.01.2023' and '01.01.2025';
+
+--3
+
+--все спектакли указаннго жанра
+select  p.name
+from theatre.repertoire as r, theatre.play as p, theatre.genre as g
+where r.play = p.id and p.genre = g.id and g.name = 'музыкальная комедия';
+
+--когда либо сыгранные cпектакли
+select p.name
+from theatre.play as p
+where p.premiere < current_date;
+
+--кол-во когда либо поставленных
+select count(*)
+from theatre.play as p
+where p.premiere < current_date;
+
+--все спектакли за указанный период
+select p.name
+from theatre.play as p
+where p.premiere between '01.01.2023' and '01.01.2025';
+
+--4
+
+--список авторов поставленных спектаклей
+select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
+from theatre.author as a, theatre.play as p, theatre.full_name as f
+where p.author = a.id and a.full_name = f.id
+group by f.name, f.surname, patronymic;
+
+--список авторв живших в указанном веке
+select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
+from theatre.author as a, theatre.full_name as f
+where a.century = 18 and f.id = a.full_name;
+
+--список авторв указанной страны
+select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
+from theatre.author as a, theatre.full_name as f
+where a.country = 'Россия' and f.id = a.full_name;
+
+--список авторов когда либо поставленных спектаклей указанного жанра
+select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
+from theatre.author as a, theatre.play as p, theatre.full_name as f, theatre.genre as g
+where p.author = a.id and a.full_name = f.id and p.genre = g.id and g.name = 'музыкальная комедия'
+group by f.name, f.surname, patronymic;
+
+--список авторов поставленных спектаклей за указанный период
+select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
+from theatre.author as a, theatre.play as p, theatre.full_name as f
+where p.author = a.id and a.full_name = f.id and p.premiere between '01.01.2023' and '01.01.2025'
+group by f.name, f.surname, patronymic;
+
+--5
+
+--перечень спектаклей указанного жанра
+select  p.name
+from  theatre.play as p, theatre.genre as g
+where p.genre = g.id and g.name = 'музыкальная комедия';
+
+--некоторого автора
+select  p.name
+from  theatre.play as p, theatre.author as a, theatre.full_name as f
+where  p.author = a.id and a.full_name = f.id
+  and f.name = 'Константин' and f.surname = 'Коровин' and f.patronymic = 'Иванович';
+
+--авторов некоторой страны
+select  p.name
+from  theatre.play as p, theatre.author as a
+where  p.author = a.id and a.country = 'Россия';
+
+--написанных в опред веке
+select  p.name
+from  theatre.play as p
+where p.create_century = 18;
+
+--впервые поставленых в указаный период
+select  p.name
+from  theatre.play as p
+where p.premiere between '01.01.2023' and '01.01.2025';
+
+--поставленные---у них была уже премьера
