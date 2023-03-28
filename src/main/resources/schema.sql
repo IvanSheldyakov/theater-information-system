@@ -1,13 +1,11 @@
 CREATE TABLE "theatre".employee(
                                    "id" serial,
-                                   "age" integer NOT NULL CHECK ( "age" > 0 ),
                                    "full_name" integer NOT NULL,
                                    "standing" interval NOT NULL,
                                    "birth_year" integer NOT NULL CHECK ( "birth_year" > 0 ),
                                    "children" bool NOT NULL DEFAULT 'false',
                                    "children_number" integer NOT NULL DEFAULT '0',
                                    "payment" money NOT NULL,
-                                   "sex" varchar(1) NOT NULL,
                                    "category" integer,
                                    CONSTRAINT "employee_pk" PRIMARY KEY ("id")
 );
@@ -51,7 +49,7 @@ CREATE TABLE "theatre".servant(
 
 CREATE TABLE "theatre".role(
                                "id" serial,
-                               "actor" integer NOT NULL,
+                               "actor" integer,
                                "primary" bool NOT NULL DEFAULT 'false',
                                "backup" integer,
                                CONSTRAINT "role_pk" PRIMARY KEY ("id")
@@ -193,14 +191,16 @@ CREATE TABLE "theatre".attribute_value (
 CREATE TABLE "theatre".employee_attribute (
                                            "employee" integer NOT NULL,
                                            "attribute" integer NOT NULL,
-                                           CONSTRAINT "employee_attribute_pk" PRIMARY KEY ("employee","attribute")
+                                           "value" integer NOT NULL,
+                                           CONSTRAINT "employee_attribute_pk" PRIMARY KEY ("employee","attribute","value")
 );
 
 
 CREATE TABLE "theatre".role_attribute (
                                        "role" integer NOT NULL,
                                        "attribute" integer NOT NULL,
-                                       CONSTRAINT "role_attribute_pk" PRIMARY KEY ("role","attribute")
+                                       "value" integer NOT NULL,
+                                       CONSTRAINT "role_attribute_pk" PRIMARY KEY ("role","attribute","value")
 );
 
 
@@ -256,10 +256,11 @@ ALTER TABLE "theatre".attribute_value ADD CONSTRAINT "attribute_value_fk0" FOREI
 
 ALTER TABLE "theatre".employee_attribute ADD CONSTRAINT "employee_attribute_fk0" FOREIGN KEY ("employee") REFERENCES "theatre".employee("id");
 ALTER TABLE "theatre".employee_attribute ADD CONSTRAINT "employee_attribute_fk1" FOREIGN KEY ("attribute") REFERENCES "theatre".attribute("id");
+ALTER TABLE "theatre".employee_attribute ADD CONSTRAINT "employee_attribute_fk2" FOREIGN KEY ("value") REFERENCES "theatre".attribute_value("id");
 
 ALTER TABLE "theatre".role_attribute ADD CONSTRAINT "role_attribute_fk0" FOREIGN KEY ("role") REFERENCES "theatre".role("id");
 ALTER TABLE "theatre".role_attribute ADD CONSTRAINT "role_attribute_fk1" FOREIGN KEY ("attribute") REFERENCES "theatre".attribute("id");
-
+ALTER TABLE "theatre".role_attribute ADD CONSTRAINT "role_attribute_fk2" FOREIGN KEY ("value") REFERENCES "theatre".attribute_value("id");
 
 
 

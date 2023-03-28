@@ -64,9 +64,9 @@ where m.employee = e.id and e.standing = '4-2';
 
 --список работников по половому признаку
 select e.name, e.surname, e.patronymic
-from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.sex
-      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
-where e.sex = 'М';
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as sex
+      from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av where e.full_name = fn.id and a.attribute = 'пол' and e.id = ea.employee and ea.attribute = a.id and av.id = ea.value) as e
+where e.sex = 'Ж';
 
 --список работников по году рождения
 select e.name, e.surname, e.patronymic
@@ -76,9 +76,9 @@ where e.birth_year = 2002;
 
 --список работников по возрасту
 select e.name, e.surname, e.patronymic
-from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.age
-      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
-where e.age = 21;
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as age
+      from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av where e.full_name = fn.id and a.attribute = 'возраст' and e.id = ea.employee and ea.attribute = a.id and av.id = ea.value) as e
+where e.age = '26';
 
 --список работников по наличию детей
 select e.name, e.surname, e.patronymic
@@ -131,10 +131,10 @@ where r.play = p.id and r.date between '01.01.2023' and '01.01.2025';
 
 --все спектакли указаннго жанра
 select  p.name
-from theatre.repertoire as r, theatre.play as p, theatre.genre as g
-where r.play = p.id and p.genre = g.id and g.name = 'музыкальная комедия';
+from theatre.play as p, theatre.genre as g
+where p.genre = g.id and g.name = 'музыкальная комедия';
 
---когда либо сыгранные cпектакли
+--список когда либо поставленных
 select p.name
 from theatre.play as p
 where p.premiere < current_date;
@@ -154,7 +154,7 @@ where p.premiere between '01.01.2023' and '01.01.2025';
 --список авторов поставленных спектаклей
 select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
 from theatre.author as a, theatre.play as p, theatre.full_name as f
-where p.author = a.id and a.full_name = f.id
+where p.author = a.id and a.full_name = f.id and p.premiere < current_date
 group by f.name, f.surname, patronymic;
 
 --список авторв живших в указанном веке
@@ -170,7 +170,7 @@ where a.country = 'Россия' and f.id = a.full_name;
 --список авторов когда либо поставленных спектаклей указанного жанра
 select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
 from theatre.author as a, theatre.play as p, theatre.full_name as f, theatre.genre as g
-where p.author = a.id and a.full_name = f.id and p.genre = g.id and g.name = 'музыкальная комедия'
+where p.author = a.id and a.full_name = f.id and p.genre = g.id and g.name = 'музыкальная комедия' and p.premiere < current_date
 group by f.name, f.surname, patronymic;
 
 --список авторов поставленных спектаклей за указанный период
@@ -208,3 +208,4 @@ from  theatre.play as p
 where p.premiere between '01.01.2023' and '01.01.2025';
 
 --поставленные---у них была уже премьера
+
