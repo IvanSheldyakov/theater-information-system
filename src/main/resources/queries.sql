@@ -207,5 +207,151 @@ select  p.name
 from  theatre.play as p
 where p.premiere between '01.01.2023' and '01.01.2025';
 
---поставленные---у них была уже премьера
+--6
+
+--список актеров подходящих под роль
+select fn.surname, fn.name, coalesce(fn.patronymic, '') as patronymic
+from theatre.full_name as fn, theatre.actor as a, theatre.employee as e, theatre.employee_attribute as ea, (select ra.attribute, ra.value
+                                                                                   from theatre.role_attribute as ra
+                                                                                   where ra.role = 2) as f
+where e.id = a.employee and f.attribute = ea.attribute and f.value = ea.value and fn.id = e.full_name
+group by fn.surname, fn.name, fn.patronymic;
+
+--7
+
+--колличество актеров
+select count(*)
+from theatre.actor;
+
+
+--список актеров
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a
+where a.employee = e.id;
+
+--есть звания
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a
+where a.employee = e.id and (a.honored_artist = true or a.national_artist = true);
+
+--получившие звания за нек период
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a, theatre.actor_contest as ac, theatre.contest as c
+where a.employee = e.id and ac.actor = a.id and (a.honored_artist = true or a.national_artist = true) and ac.contest = c.id and ac.winner = true and c.date between '01.01.2023' and '01.01.2025';
+
+--получившие звания на указ конкурсе
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a, theatre.actor_contest as ac, theatre.contest as c
+where a.employee = e.id and ac.actor = a.id and (a.honored_artist = true or a.national_artist = true) and ac.contest = c.id and ac.winner = true and c.name = 'Оскар';
+
+--по полу
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as sex, e.id
+      from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av
+      where e.full_name = fn.id and a.attribute = 'пол' and e.id = ea.employee and ea.attribute = a.id and av.id = ea.value) as e,
+    theatre.actor as a
+where e.sex = 'М' and a.employee  = e.id ;
+
+--список по возрасту
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as age, e.id
+      from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av
+      where e.full_name = fn.id and a.attribute = 'возраст' and e.id = ea.employee and ea.attribute = a.id and av.id = ea.value) as e,
+    theatre.actor as a
+where e.age = '21' and e.id = a.employee;
+
+--8
+
+--список актеров и постановщика в туре за указанный период
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a, theatre.play as p, theatre.play_actor as pa, theatre.producer as pro, theatre.tour as t
+where ((a.employee = e.id and a.id = pa.actor and pa.play = p.id) or (pro.employee = e.id and (pro.id = p.art_producer or pro.id = p.conductor_producer or pro.id = p.director_producer))) and t.play = p.id and t.start > '10.02.2021' and t."end" < '01.01.2024'
+group by e.name, e.surname, e.patronymic;
+
+--список актеров и постановщика в туре опред спектакля и уехавших в точное время
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a, theatre.play as p, theatre.play_actor as pa, theatre.producer as pro, theatre.tour as t
+where ((a.employee = e.id and a.id = pa.actor and pa.play = p.id) or (pro.employee = e.id and (pro.id in (p.director_producer,p.art_producer, p.conductor_producer)))) and t.play = p.id and t.start = '01.14.2022' and p.id = 1
+group by e.name, e.surname, e.patronymic;
+
+--9
+
+--список актеров спектакля
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+    theatre.actor as a, theatre.play as p, theatre.play_actor as pa
+where p.id = 1 and e.id = a.employee and pa.play = p.id and pa.actor = a.id;
+
+--список дублеров спектакля
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.actor as a, theatre.play as p, theatre.play_role as pr, theatre.role as r
+where p.id = 1 and e.id = a.employee and pr.play = p.id and pr.role = r.id and r.backup = a.id;
+
+--список постановщиков
+select e.name, e.surname, e.patronymic
+from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.id
+      from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+     theatre.producer as pro, theatre.play as p
+where p.id = 1 and e.id = pro.employee and (pro.id in (p.director_producer,p.art_producer, p.conductor_producer));
+
+--список авторов
+select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
+from theatre.author as a, theatre.play as p, theatre.full_name as f
+where p.author = a.id and a.full_name = f.id and p.premiere < current_date
+group by f.name, f.surname, patronymic;
+
+--дата премьеры
+select p.premiere
+from theatre.play as p
+where p.id = 1;
+
+--10
+
+--все роли актера
+select av.value
+from theatre.actor as a, theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at
+where a.id = 1 and r.actor = a.id and ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id;
+
+--кол-во ролей актера
+select count(*)
+from theatre.actor as a, theatre.role as r
+where a.id = 1 and r.actor = a.id;
+
+--все роли актера за опред время
+select av.value
+from theatre.actor as a, theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at, theatre.play_role as pr, theatre.play as p, theatre.repertoire as rep
+where a.id = 1 and r.actor = a.id and ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id and pr.role = r.id and pr.play = p.id and p.id = rep.play and rep.date between '01.01.2023' and '01.01.2025'; ;
+
+--роли в спектаклях опред жанра
+select av.value
+from  theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at, theatre.play_role as pr, theatre.play as p, theatre.genre as g
+where ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id and pr.role = r.id and pr.play = p.id and p.genre = g.id and g.name = 'музыкальная комедия'
+group by av.value;
+
+--роли в спектакле опред реж постановщика
+select av.value
+from  theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at, theatre.play_role as pr, theatre.play as p, theatre.producer as pro
+where  ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id and pr.role = r.id and pr.play = p.id and p.director_producer = pro.id and pro.id = 1;
+
+--роли в детских спектаклях
+select av.value
+from  theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at, theatre.play_role as pr, theatre.play as p, theatre.audience as aud
+where ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id and pr.role = r.id and pr.play = p.id and p.audience = aud.id and aud.name = 'детский';
+
+--11
 

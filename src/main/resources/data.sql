@@ -83,3 +83,19 @@ insert into theatre.role("primary") values (true);
 insert into theatre.role("primary") values (false);
 
 insert into theatre.role_attribute(role, attribute, value) values (1,6,17), (2,6,18), (2,4,9), (1,4,9),(1,1,1);
+
+update theatre.actor set honored_artist = true where id = 1;
+
+insert into theatre.contest(name, date) values ('Оскар', '03.13.2023'), ('Бафта','02.20.2022');
+
+insert into theatre.actor_contest(actor, contest, winner) values (1,1,true), (1,2,false), (2,1,false);
+
+insert into theatre.play_actor(play, actor) values (1,1);
+
+insert into theatre.tour(start, "end", play) values ('01.14.2022','02.28.2022',1);
+
+insert into theatre.play_role(play, role) values (1,1), (1,2);
+
+insert into theatre.play_actor(play, actor) values (1, 2);
+
+update theatre.role SET actor = 1, backup = 2 where id = 1
