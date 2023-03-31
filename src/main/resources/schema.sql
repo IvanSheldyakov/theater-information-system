@@ -160,7 +160,7 @@ CREATE TABLE "theatre".ticket(
                                  "place" integer NOT NULL,
                                  "row" integer NOT NULL,
                                  "play" integer NOT NULL,
-                                 "buy_date" DATE NOT NULL,
+                                 "buy_date" DATE,
                                  CONSTRAINT "ticket_pk" PRIMARY KEY ("id")
 );
 

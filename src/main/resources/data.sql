@@ -98,4 +98,8 @@ insert into theatre.play_role(play, role) values (1,1), (1,2);
 
 insert into theatre.play_actor(play, actor) values (1, 2);
 
-update theatre.role SET actor = 1, backup = 2 where id = 1
+update theatre.role SET actor = 1, backup = 2 where id = 1;
+
+insert into theatre.ticket(cost, place, row, play, buy_date) values (300, 2, 12, 1, '03.12.2022'), (400, 5, 2, 1, '1.01.2020');
+insert into theatre.ticket(cost, place, row, play, buy_date) values (200, 2, 23,2, '06.06.2022');
+insert into theatre.ticket(cost, place, row, play, buy_date) values (400, 2, 23,3, '07.06.2022');

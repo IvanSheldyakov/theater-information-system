@@ -355,3 +355,61 @@ where ra.role = r.id and ra.attribute = at.id and at.attribute = 'описани
 
 --11
 
+--все проданные билеты
+select count(*)
+from theatre.ticket;
+
+--колво на конкретный спектакль
+select count(*)
+from theatre.ticket as t, theatre.play as p
+where t.play = p.id and p.id = 1;
+
+--кол-во билетов на премьеры
+select count(*)
+from theatre.ticket as t, theatre.play as p, theatre.repertoire as rep
+where t.play = p.id and p.id = rep.play and p.premiere = rep.date;
+
+--кол-во проданных билетов за период
+select count(*)
+from theatre.ticket as t
+where t.buy_date between '01.01.2021' and '02.01.2023';
+
+--12
+
+--сумма денег на указанный спектакль
+select sum(t.cost)
+from theatre.ticket as t, theatre.play as p
+where t.play = p.id and p.id = 1;
+
+--сумма за определеное время
+select sum(t.cost)
+from theatre.ticket as t
+where t.buy_date between '01.01.2021' and '02.01.2023';
+
+--13
+
+--кол-во свободных мест на все спектакли
+
+select sum(p.places) - t.count as count
+from theatre.play as p, theatre.repertoire as rep, (select count(*) as count
+                                                    from theatre.ticket as t, theatre.play as p
+                                                    where t.play = p.id) as t
+where p.id = rep.play
+group by count;
+
+--кол-во свободных мест на конкрет спек
+select p.places - t.count as count
+from theatre.play as p, theatre.repertoire as rep, (select count(*) as count
+                                                    from theatre.ticket as t, theatre.play as p
+                                                    where t.play = p.id and p.id = 1) as t
+where p.id = rep.play and p.id = 1;
+
+
+--кол-во свободных мест на премьеры
+select sum(p.places) - t.count as count
+from theatre.play as p, theatre.repertoire as rep, (select count(*) as count
+                                                    from theatre.ticket as t, theatre.play as p, theatre.repertoire as rep
+                                                    where t.play = p.id and rep.play = p.id and rep.date = p.premiere) as t
+where p.id = rep.play and rep.date = p.premiere
+group by count;
+
