@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="af7cc6a8-4d17-4d5e-8f00-6609b42ebb4b" name="Changes" comment="entities">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Actor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/ActorContest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Attribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/AttributeValue.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Audience.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Author.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Contest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Employee.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/EmployeeAttribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/FullName.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Genre.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Musician.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Play.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/PlayActor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/PlayMusician.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/PlayRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Producer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Repertoire.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/RoleAttribute.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Servant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Ticket.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Tour.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2M5kPnXN1mEy5oW9V7DyJm1TGgv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Иван/Desktop/Универ/диплом/project/db_project/src/main/resources",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "com.haulmont.jpb.viewMode"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "bd069a15-d266-4bd7-bf46-91ece1223500/database/\"postgres\"",
+      "bd069a15-d266-4bd7-bf46-91ece1223500",
+      "bd069a15-d266-4bd7-bf46-91ece1223500/database/\"postgres\"/schema/\"theatre\""
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Иван\Desktop\Универ\диплом\project\db_project\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.TheaterInformationSystemApplication">
+    <configuration name="data.sql (1)" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/src/main/resources/data.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="bd069a15-d266-4bd7-bf46-91ece1223500" namespace="database/&quot;postgres&quot;/schema/&quot;theatre&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-mode>FILE</script-mode>
+      <data-source id="bd069a15-d266-4bd7-bf46-91ece1223500" namespace="database/&quot;postgres&quot;/schema/&quot;theatre&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="schema.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/src/main/resources/schema.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="bd069a15-d266-4bd7-bf46-91ece1223500" namespace="database/&quot;postgres&quot;/schema/&quot;theatre&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="db_project" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="db.theatre.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TheaterInformationSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="db_project" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.db.theaterinformationsystem.TheaterInformationSystemApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.App" />
+        <item itemvalue="Database Script.data.sql (1)" />
+        <item itemvalue="Database Script.schema.sql" />
+        <item itemvalue="Database Script.data.sql" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="af7cc6a8-4d17-4d5e-8f00-6609b42ebb4b" name="Changes" comment="" />
+      <created>1677064812162</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677064812162</updated>
+      <workItem from="1677064815170" duration="2222000" />
+      <workItem from="1678708673724" duration="5601000" />
+      <workItem from="1678883951763" duration="984000" />
+      <workItem from="1679221078014" duration="12101000" />
+      <workItem from="1679293351208" duration="13000" />
+      <workItem from="1679414426022" duration="3553000" />
+      <workItem from="1679473509723" duration="267000" />
+      <workItem from="1679473800327" duration="763000" />
+      <workItem from="1679502321420" duration="133000" />
+      <workItem from="1680017074086" duration="7768000" />
+      <workItem from="1680070531881" duration="15000" />
+      <workItem from="1680102612042" duration="8364000" />
+      <workItem from="1680155517668" duration="4336000" />
+      <workItem from="1680194497167" duration="1421000" />
+      <workItem from="1680278652329" duration="4428000" />
+      <workItem from="1680419081372" duration="116000" />
+      <workItem from="1680500227671" duration="39000" />
+      <workItem from="1680925127372" duration="1593000" />
+      <workItem from="1681230626055" duration="1136000" />
+      <workItem from="1681273241320" duration="8704000" />
+    </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <created>1679232684437</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679232684437</updated>
+    </task>
+    <task id="LOCAL-00002" summary="new queris">
+      <created>1679417986080</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679417986080</updated>
+    </task>
+    <task id="LOCAL-00003" summary="new queris">
+      <created>1680024726607</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680024726607</updated>
+    </task>
+    <task id="LOCAL-00004" summary="new queris">
+      <created>1680196179652</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680196179652</updated>
+    </task>
+    <task id="LOCAL-00005" summary="new queris">
+      <created>1680289252412</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680289252412</updated>
+    </task>
+    <task id="LOCAL-00006" summary="entities">
+      <created>1681282350443</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681282350443</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <MESSAGE value="new queris" />
+    <MESSAGE value="entities" />
+    <option name="LAST_COMMIT_MESSAGE" value="entities" />
+  </component>
+</project>
