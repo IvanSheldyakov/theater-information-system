@@ -2,7 +2,7 @@ package com.db.theaterinformationsystem.model;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(schema = "theatre", name = "musician")

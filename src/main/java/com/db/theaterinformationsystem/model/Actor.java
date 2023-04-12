@@ -1,8 +1,9 @@
 package com.db.theaterinformationsystem.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
 
 @Builder
 @AllArgsConstructor
@@ -11,7 +12,6 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "actor", schema = "theatre")
-
 public class Actor {
 
     @Id

@@ -5,33 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="af7cc6a8-4d17-4d5e-8f00-6609b42ebb4b" name="Changes" comment="entities">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Actor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/ActorContest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Attribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/AttributeValue.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Audience.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Author.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Category.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Contest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Employee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/EmployeeAttribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/FullName.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Genre.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Musician.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Play.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/PlayActor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/PlayMusician.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/PlayRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Producer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Repertoire.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/RoleAttribute.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Servant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Ticket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/db/theatre/model/Tour.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/controller/ActorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/controller/EmployeeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/repository/ActorRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/repository/EmployeeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/TheaterInformationSystemApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/TheaterInformationSystemApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Actor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Actor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/ActorContest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/ActorContest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/AttributeValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/AttributeValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Audience.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Audience.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Contest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Contest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/EmployeeAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/EmployeeAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/FullName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/FullName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Musician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Musician.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Play.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/PlayActor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/PlayActor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/PlayMusician.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/PlayMusician.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/PlayRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/PlayRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Producer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Producer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Repertoire.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Repertoire.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/RoleAttribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/RoleAttribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Servant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Servant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Tour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/db/theaterinformationsystem/model/Tour.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/queries.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/queries.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +46,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -75,6 +81,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -108,15 +118,13 @@
       <data-source id="bd069a15-d266-4bd7-bf46-91ece1223500" namespace="database/&quot;postgres&quot;/schema/&quot;theatre&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-mode>FILE</script-mode>
-      <data-source id="bd069a15-d266-4bd7-bf46-91ece1223500" namespace="database/&quot;postgres&quot;/schema/&quot;theatre&quot;" />
+    <configuration name="generated-requests | #18" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="18" requestIdentifier="#18" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="schema.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
-      <script-file value="$PROJECT_DIR$/src/main/resources/schema.sql" />
-      <script-mode>FILE</script-mode>
-      <data-source id="bd069a15-d266-4bd7-bf46-91ece1223500" namespace="database/&quot;postgres&quot;/schema/&quot;theatre&quot;" />
+    <configuration name="generated-requests | #19" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="19" requestIdentifier="#19" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #20" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="20" requestIdentifier="#20" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -135,10 +143,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #20" />
+        <item itemvalue="HTTP Request.generated-requests | #19" />
+        <item itemvalue="HTTP Request.generated-requests | #18" />
         <item itemvalue="Spring Boot.App" />
         <item itemvalue="Database Script.data.sql (1)" />
-        <item itemvalue="Database Script.schema.sql" />
-        <item itemvalue="Database Script.data.sql" />
       </list>
     </recent_temporary>
   </component>
@@ -169,7 +178,7 @@
       <workItem from="1680500227671" duration="39000" />
       <workItem from="1680925127372" duration="1593000" />
       <workItem from="1681230626055" duration="1136000" />
-      <workItem from="1681273241320" duration="8704000" />
+      <workItem from="1681273241320" duration="17202000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1679232684437</created>
@@ -213,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681282350443</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="entities">
+      <created>1681296057963</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681296057963</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

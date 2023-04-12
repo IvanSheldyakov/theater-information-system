@@ -219,40 +219,40 @@ group by fn.surname, fn.name, fn.patronymic;
 
 --7
 
---колличество актеров
+--колличество актеров +
 select count(*)
 from theatre.actor;
 
 
---список актеров
+--список актеров +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
      theatre.actor as a
 where a.employee = e.id;
 
---есть звания
+--есть звания +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
      theatre.actor as a
 where a.employee = e.id and (a.honored_artist = true or a.national_artist = true);
 
---получившие звания за нек период
+--получившие звания за нек период +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
      theatre.actor as a, theatre.actor_contest as ac, theatre.contest as c
 where a.employee = e.id and ac.actor = a.id and (a.honored_artist = true or a.national_artist = true) and ac.contest = c.id and ac.winner = true and c.date between '01.01.2023' and '01.01.2025';
 
---получившие звания на указ конкурсе
+--получившие звания на указ конкурсе +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
      theatre.actor as a, theatre.actor_contest as ac, theatre.contest as c
 where a.employee = e.id and ac.actor = a.id and (a.honored_artist = true or a.national_artist = true) and ac.contest = c.id and ac.winner = true and c.name = 'Оскар';
 
---по полу
+--по полу +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as sex, e.id
       from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av
@@ -260,7 +260,7 @@ from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '')
     theatre.actor as a
 where e.sex = 'М' and a.employee  = e.id ;
 
---список по возрасту
+--список по возрасту +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as age, e.id
       from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av
@@ -327,7 +327,7 @@ select av.value
 from theatre.actor as a, theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at
 where a.id = 1 and r.actor = a.id and ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id;
 
---кол-во ролей актера
+--кол-во ролей актера +
 select count(*)
 from theatre.actor as a, theatre.role as r
 where a.id = 1 and r.actor = a.id;

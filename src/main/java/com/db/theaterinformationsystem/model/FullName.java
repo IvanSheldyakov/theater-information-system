@@ -2,7 +2,7 @@ package com.db.theaterinformationsystem.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Builder
 @AllArgsConstructor
