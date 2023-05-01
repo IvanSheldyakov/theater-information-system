@@ -22,7 +22,7 @@ public class Employee {
     private FullName fullName;
 
     @Column(name = "standing", nullable = false)
-    private Integer standing;
+    private String standing;
 
     @Column(name = "birth_year", nullable = false)
     private Integer birthYear;

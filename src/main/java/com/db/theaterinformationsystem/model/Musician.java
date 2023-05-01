@@ -1,12 +1,13 @@
 package com.db.theaterinformationsystem.model;
 
-import lombok.Data;
-
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(schema = "theatre", name = "musician")
-@Data
+@Getter
+@Setter
 public class Musician {
 
     @Id

@@ -11,7 +11,6 @@ import jakarta.persistence.*;
 @Setter
 @Entity
 @Table(name = "full_name", schema = "theatre")
-
 public class FullName {
 
     @Id

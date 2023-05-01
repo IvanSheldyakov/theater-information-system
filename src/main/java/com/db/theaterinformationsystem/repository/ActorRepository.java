@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.repository;
 
 import com.db.theaterinformationsystem.model.Actor;
+import com.db.theaterinformationsystem.model.ActorProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +14,14 @@ import java.util.Map;
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Long> {
     long count();
+
+    @Query("SELECT COUNT(a) FROM Actor a WHERE a.employee.standing = :standing")
+    long countActorsWithStanding(@Param("standing") String standing);
+
+    @Query("SELECT f.name AS name, f.surname AS surname, COALESCE(f.patronymic, '') AS patronymic " +
+            "FROM Actor a JOIN a.employee e JOIN e.fullName f " +
+            "WHERE e.standing = :standing")
+    List<Map<String, String>> findActorsWithStanding(@Param("standing") Integer standing);
 
     @Query("SELECT e.fullName.name AS name, e.fullName.surname AS surname, COALESCE(e.fullName.patronymic, '') AS patronymic " +
             "FROM Actor a JOIN a.employee e")
@@ -53,6 +62,14 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
             "FROM Actor a JOIN a.employee e JOIN Role r ON a.id = r.actor.id " +
             "WHERE a.id = :actorId")
     int countRolesByActorId(@Param("actorId") Long actorId);
+
+    @Query("SELECT new com.db.theaterinformationsystem.model.ActorProjection(fn.surname, fn.name, COALESCE(fn.patronymic, '')) as patronymic " +
+            "FROM Actor a JOIN a.employee e JOIN e.fullName fn JOIN EmployeeAttribute ea ON e.id = ea.employee.id " +
+            "WHERE EXISTS (SELECT 1 " +
+            "FROM RoleAttribute ra " +
+            "WHERE ra.role.id = :roleId AND ra.attribute = ea.attribute AND ra.value = ea.value) " +
+            "GROUP BY fn.surname, fn.name, fn.patronymic")
+    List<ActorProjection> findActorsForRole(@Param("roleId") Long roleId);
 
 
 }
