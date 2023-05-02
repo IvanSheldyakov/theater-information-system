@@ -1,26 +1,26 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.RepertoireDTO;
 import com.db.theaterinformationsystem.repository.RepertoireRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.db.theaterinformationsystem.service.RepertoireService;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
+@Tag(name = "Репертуар")
 public class RepertoireController {
 
     private final RepertoireRepository repertoireRepository;
-
-    @Autowired
-    public RepertoireController(RepertoireRepository repertoireRepository) {
-        this.repertoireRepository = repertoireRepository;
-    }
+    private final RepertoireService repertoireService;
 
     @GetMapping("/repertoire/count")
     public long countAllRepertoire() {
@@ -66,6 +66,34 @@ public class RepertoireController {
     @GetMapping("/repertoire/total-seats-premieres")
     public Long countTotalSeatsForPremieres() {
         return repertoireRepository.countTotalSeatsForPremieres();
+    }
+
+    @PostMapping("/repertoire/create")
+    public ResponseEntity<Long> create(@RequestBody RepertoireDTO repertoireDTO) {
+        Long id = repertoireService.save(repertoireDTO);
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/repertoire/update")
+    public ResponseEntity<HttpStatus> update(@RequestBody RepertoireDTO repertoireDTO) {
+        repertoireService.save(repertoireDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/repertoire/find/by/id")
+    public RepertoireDTO find(@RequestParam Long id) {
+        return repertoireService.find(id);
+    }
+
+    @GetMapping("/repertoire/find/all")
+    public List<RepertoireDTO> findAll() {
+        return repertoireService.findAll();
+    }
+
+    @DeleteMapping("/repertoire/delete/by/id")
+    public ResponseEntity<HttpStatus> delete(@RequestParam Long id) {
+        repertoireRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
