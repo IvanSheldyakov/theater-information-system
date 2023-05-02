@@ -2,7 +2,7 @@ package com.db.theaterinformationsystem.controller;
 
 import com.db.theaterinformationsystem.repository.PlayRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,8 +44,8 @@ public class PlayController {
     }
 
     @GetMapping("/plays/premiere")
-    public List<String> findPlaysByPremierePeriod(@RequestParam("startDate") LocalDate startDate,
-                                                  @RequestParam("endDate") LocalDate endDate) {
+    public List<String> findPlaysByPremierePeriod(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                  @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return playRepository.findPlaysByPremierePeriod(startDate, endDate);
     }
 
@@ -55,8 +55,8 @@ public class PlayController {
     }
 
     @GetMapping("/plays/between-dates")
-    public List<String> findAllBetweenDates(@RequestParam("startDate") LocalDate startDate,
-                                            @RequestParam("endDate") LocalDate endDate) {
+    public List<String> findAllBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                            @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return playRepository.findAllBetweenDates(startDate, endDate);
     }
 

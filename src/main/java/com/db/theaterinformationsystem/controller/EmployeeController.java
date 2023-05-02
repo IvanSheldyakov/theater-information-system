@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +45,7 @@ public class EmployeeController {
 
     @GetMapping("/employees/payment")
     public List<Map<String, String>> findEmployeesByPayment(@RequestParam("payment") String payment) {
-        return employeeRepository.findEmployeesByPayment(payment);
+        return employeeRepository.findEmployeesByPayment(new BigDecimal(payment));
     }
 
     @GetMapping("/employees")

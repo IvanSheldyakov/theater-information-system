@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Repository
@@ -24,8 +25,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     Long countTicketsSoldInPeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
     @Query("SELECT SUM(t.cost) FROM Ticket t WHERE t.play.id = :playId")
-    Long sumCostByPlayId(@Param("playId") Long playId);
+    BigDecimal sumCostByPlayId(@Param("playId") Long playId);
 
     @Query("SELECT SUM(t.cost) FROM Ticket t WHERE t.buyDate BETWEEN :startDate AND :endDate")
-    Long sumCostInPeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    BigDecimal sumCostInPeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

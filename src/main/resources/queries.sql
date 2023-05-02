@@ -1,105 +1,105 @@
---1
+--1+
 
---список всех работников
+--список всех работников +
 select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic
 from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id;
 
---колличество работников
+--колличество работников +
 select count(*) from theatre.employee;
 
---список актеров
+--список актеров +
 select e.name, e.surname, e.patronymic
 from
 (select fn.name, fn.surname, coalesce(fn.patronymic, '') as patronymic, e.id from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
 theatre.actor as a
 where a.employee = e.id;
 
---кол-во актеров
+--кол-во актеров +
 select count(*) from theatre.actor;
 
---кол-во музыкантов
+--кол-во музыкантов +
 select count(*) from theatre.musician;
 
---список музыкантов
-select e.name, e.surname, e.patronymic
-from
-    (select fn.name, fn.surname, coalesce(fn.patronymic, '') as patronymic, e.id from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
-    theatre.musician as m
-where m.employee = e.id;
-
---кол-во работников с определенным стажем
+--кол-во работников с определенным стажем +
 select count(*)
 from theatre.employee as e
 where e.standing = '4-2';
 
---список работников с определенным стажем
+--список работников с определенным стажем +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
 where e.standing = '4-2';
 
---кол-во актеров c определенным стажем
+--кол-во актеров c определенным стажем+
 select count(*)
 from theatre.actor as a, theatre.employee as e
 where a.employee = e.id and e.standing = '4-2';
 
---список актеров с определенным стажем
+--список актеров с определенным стажем+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
 theatre.actor as a
 where a.employee = e.id and e.standing = '4-2';
 
---кол-во музыкантов c определенным стажем
+--кол-во музыкантов c определенным стажем+
 select count(*)
 from theatre.musician as a, theatre.employee as e
 where a.employee = e.id and e.standing = '4-2';
 
---список музыкантов с определенным стажем
+--список музыкантов+
+select e.name, e.surname, e.patronymic
+from
+    (select fn.name, fn.surname, coalesce(fn.patronymic, '') as patronymic, e.id from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
+    theatre.musician as m
+where m.employee = e.id;
+
+--список музыкантов с определенным стажем+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.standing, e.id
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e,
      theatre.musician as m
 where m.employee = e.id and e.standing = '4-2';
 
---список работников по половому признаку
+--список работников по половому признаку+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as sex
       from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av where e.full_name = fn.id and a.attribute = 'пол' and e.id = ea.employee and ea.attribute = a.id and av.id = ea.value) as e
 where e.sex = 'Ж';
 
---список работников по году рождения
+--список работников по году рождения+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.birth_year
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
 where e.birth_year = 2002;
 
---список работников по возрасту
+--список работников по возрасту+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, av.value as age
       from theatre.full_name as fn, theatre.employee as e, theatre.attribute as a, theatre.employee_attribute as ea, theatre.attribute_value as av where e.full_name = fn.id and a.attribute = 'возраст' and e.id = ea.employee and ea.attribute = a.id and av.id = ea.value) as e
 where e.age = '26';
 
---список работников по наличию детей
+--список работников по наличию детей+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.children
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
 where e.children = true;
 
---список работников по кол-ву детей
+--список работников по кол-ву детей +
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.children_number
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
 where e.children_number = 0;
 
---список работников по размеру зп
+--список работников по размеру зп+
 select e.name, e.surname, e.patronymic
 from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '') as patronymic, e.payment
       from theatre.full_name as fn, theatre.employee as e where e.full_name = fn.id) as e
 where e.payment = '$10000';
 
 
---2
+--2+
 
 --число спектаклей в репе
 select count(*) from theatre.repertoire;
@@ -127,7 +127,7 @@ select p.name
 from theatre.repertoire as r, theatre.play as p
 where r.play = p.id and r.date between '01.01.2023' and '01.01.2025';
 
---3
+--3+
 
 --все спектакли указаннго жанра
 select  p.name
@@ -149,7 +149,7 @@ select p.name
 from theatre.play as p
 where p.premiere between '01.01.2023' and '01.01.2025';
 
---4
+--4+
 
 --список авторов поставленных спектаклей
 select f.name, f.surname, coalesce(f.patronymic, '') as patronymic
@@ -179,7 +179,7 @@ from theatre.author as a, theatre.play as p, theatre.full_name as f
 where p.author = a.id and a.full_name = f.id and p.premiere between '01.01.2023' and '01.01.2025'
 group by f.name, f.surname, patronymic;
 
---5
+--5 +
 
 --перечень спектаклей указанного жанра
 select  p.name
@@ -207,17 +207,17 @@ select  p.name
 from  theatre.play as p
 where p.premiere between '01.01.2023' and '01.01.2025';
 
---6
+--6 +
 
 --список актеров подходящих под роль
 select fn.surname, fn.name, coalesce(fn.patronymic, '') as patronymic
 from theatre.full_name as fn, theatre.actor as a, theatre.employee as e, theatre.employee_attribute as ea, (select ra.attribute, ra.value
                                                                                    from theatre.role_attribute as ra
-                                                                                   where ra.role = 2) as f
+                                                                                   where ra.role = 1) as f
 where e.id = a.employee and f.attribute = ea.attribute and f.value = ea.value and fn.id = e.full_name
 group by fn.surname, fn.name, fn.patronymic;
 
---7
+--7 +
 
 --колличество актеров +
 select count(*)
@@ -268,7 +268,7 @@ from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '')
     theatre.actor as a
 where e.age = '21' and e.id = a.employee;
 
---8
+--8+
 
 --список актеров и постановщика в туре за указанный период
 select e.name, e.surname, e.patronymic
@@ -286,7 +286,7 @@ from (select fn.name as name, fn.surname as surname, coalesce(fn.patronymic, '')
 where ((a.employee = e.id and a.id = pa.actor and pa.play = p.id) or (pro.employee = e.id and (pro.id in (p.director_producer,p.art_producer, p.conductor_producer)))) and t.play = p.id and t.start = '01.14.2022' and p.id = 1
 group by e.name, e.surname, e.patronymic;
 
---9
+--9+
 
 --список актеров спектакля
 select e.name, e.surname, e.patronymic
@@ -320,14 +320,14 @@ select p.premiere
 from theatre.play as p
 where p.id = 1;
 
---10
+--10+
 
 --все роли актера
 select av.value
 from theatre.actor as a, theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at
 where a.id = 1 and r.actor = a.id and ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id;
 
---кол-во ролей актера +
+--кол-во ролей актера
 select count(*)
 from theatre.actor as a, theatre.role as r
 where a.id = 1 and r.actor = a.id;
@@ -353,7 +353,7 @@ select av.value
 from  theatre.role as r, theatre.role_attribute as ra, theatre.attribute_value as av, theatre.attribute as at, theatre.play_role as pr, theatre.play as p, theatre.audience as aud
 where ra.role = r.id and ra.attribute = at.id and at.attribute = 'описание роли' and ra.value = av.id and av.attribute = at.id and pr.role = r.id and pr.play = p.id and p.audience = aud.id and aud.name = 'детский';
 
---11
+--11+
 
 --все проданные билеты
 select count(*)
@@ -374,7 +374,7 @@ select count(*)
 from theatre.ticket as t
 where t.buy_date between '01.01.2021' and '02.01.2023';
 
---12
+--12+
 
 --сумма денег на указанный спектакль
 select sum(t.cost)

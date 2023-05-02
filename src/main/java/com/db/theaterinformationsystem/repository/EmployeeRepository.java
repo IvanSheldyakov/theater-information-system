@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     // Список работников по размеру зарплаты
     @Query("SELECT e.fullName.name AS name, e.fullName.surname AS surname, COALESCE(e.fullName.patronymic, '') AS patronymic" +
             " FROM Employee e WHERE e.payment = :payment")
-    List<Map<String, String>> findEmployeesByPayment(@Param("payment") String payment);
+    List<Map<String, String>> findEmployeesByPayment(@Param("payment") BigDecimal payment);
 
     @Query("SELECT e.fullName.name AS name, e.fullName.surname AS surname, COALESCE(e.fullName.patronymic, '') AS patronymic FROM Employee e")
     List<Map<String, String>> findAllEmployees();

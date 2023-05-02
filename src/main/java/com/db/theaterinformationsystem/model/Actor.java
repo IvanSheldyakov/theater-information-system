@@ -18,17 +18,17 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee", nullable = false, unique = true)
     private Employee employee;
 
     @Column(name = "honored_artist", nullable = false)
-    private Boolean honoredArtist;
+    private Boolean honoredArtist = Boolean.FALSE;
 
     @Column(name = "national_artist", nullable = false)
-    private Boolean nationalArtist;
+    private Boolean nationalArtist = Boolean.FALSE;
 
     @Column(name = "student", nullable = false)
-    private Boolean student;
+    private Boolean student = Boolean.FALSE;
 
 }

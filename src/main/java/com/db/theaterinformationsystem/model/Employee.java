@@ -1,10 +1,13 @@
 package com.db.theaterinformationsystem.model;
 
+import com.db.theaterinformationsystem.converters.PeriodToStringConverter;
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.Period;
 
-@Builder
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -21,8 +24,9 @@ public class Employee {
     @JoinColumn(name = "full_name", nullable = false)
     private FullName fullName;
 
-    @Column(name = "standing", nullable = false)
-    private String standing;
+    @Column(columnDefinition = "text not null", name = "standing")
+    @Convert(converter = PeriodToStringConverter.class)
+    private Period standing;
 
     @Column(name = "birth_year", nullable = false)
     private Integer birthYear;
@@ -33,10 +37,10 @@ public class Employee {
     @Column(name = "children_number", nullable = false)
     private Integer childrenNumber;
 
-    @Column(name = "payment", nullable = false)
-    private Double payment;
+    @Column(precision = 19, scale = 4, nullable = false)
+    private BigDecimal payment;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category")
     private Category category;
 

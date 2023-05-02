@@ -2,6 +2,7 @@ package com.db.theaterinformationsystem.controller;
 
 import com.db.theaterinformationsystem.repository.RepertoireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +43,8 @@ public class RepertoireController {
     }
 
     @GetMapping("/repertoire/date-range")
-    public List<String> findAllPlaysInRepertoireBetweenDates(@RequestParam("startDate") LocalDate startDate,
-                                                             @RequestParam("endDate") LocalDate endDate) {
+    public List<String> findAllPlaysInRepertoireBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return repertoireRepository.findAllPlaysInRepertoireBetweenDates(startDate, endDate);
     }
 

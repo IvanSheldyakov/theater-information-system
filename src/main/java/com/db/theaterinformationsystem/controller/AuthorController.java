@@ -2,6 +2,7 @@ package com.db.theaterinformationsystem.controller;
 
 import com.db.theaterinformationsystem.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,8 +44,8 @@ public class AuthorController {
     }
 
     @GetMapping("/authors/play-premiere-period")
-    public List<Map<String, String>> findAuthorsByPlayPremierePeriod(@RequestParam("startDate") LocalDate startDate,
-                                                                     @RequestParam("endDate") LocalDate endDate) {
+    public List<Map<String, String>> findAuthorsByPlayPremierePeriod(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                                     @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return authorRepository.findAuthorsByPlayPremierePeriod(startDate, endDate);
     }
 

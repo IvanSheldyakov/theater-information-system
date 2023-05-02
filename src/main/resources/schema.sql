@@ -1,11 +1,11 @@
 CREATE TABLE "theatre".employee(
                                    "id" serial,
                                    "full_name" integer NOT NULL,
-                                   "standing" interval NOT NULL,
+                                   "standing" text NOT NULL,
                                    "birth_year" integer NOT NULL CHECK ( "birth_year" > 0 ),
                                    "children" bool NOT NULL DEFAULT 'false',
                                    "children_number" integer NOT NULL DEFAULT '0',
-                                   "payment" money NOT NULL,
+                                   "payment" DECIMAL(19, 4) NOT NULL,
                                    "category" integer,
                                    CONSTRAINT "employee_pk" PRIMARY KEY ("id")
 );
@@ -156,7 +156,7 @@ CREATE TABLE "theatre".tour(
 
 CREATE TABLE "theatre".ticket(
                                  "id" serial,
-                                 "cost" money NOT NULL,
+                                 "cost" DECIMAL(19, 4) NOT NULL,
                                  "place" integer NOT NULL,
                                  "row" integer NOT NULL,
                                  "play" integer NOT NULL,
