@@ -14,6 +14,10 @@ import java.util.Map;
 
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, Long> {
+
+
+    Actor save(Actor actor);
+
     long count();
 
     @Query("SELECT COUNT(a) FROM Actor a WHERE a.employee.standing = :standing")

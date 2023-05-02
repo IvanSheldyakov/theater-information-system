@@ -1,7 +1,5 @@
 package com.db.theaterinformationsystem.model;
 
-import lombok.Data;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,27 +16,27 @@ public class Play {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "genre", nullable = false)
     private Genre genre;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "audience", nullable = false)
     private Audience audience;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author", nullable = false)
     private Author author;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "director_producer", nullable = false)
     private Producer directorProducer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "art_producer", nullable = false)
     private Producer artProducer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "conductor_producer", nullable = false)
     private Producer conductorProducer;
 

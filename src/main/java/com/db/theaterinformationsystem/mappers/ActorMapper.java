@@ -8,9 +8,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = CommonMapper.class)
 public interface ActorMapper {
 
-    //@Mapping(target = "honoredArtist", source = "honoredArtist")
+
     ActorDTO map(Actor actor);
 
-  //  @Mapping(target = "id", ignore = true)
     Actor map(ActorDTO dto);
 }

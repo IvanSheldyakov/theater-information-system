@@ -23,4 +23,6 @@ public interface MusicianRepository extends JpaRepository<Musician, Long> {
             "FROM Musician m JOIN m.employee e JOIN e.fullName f " +
             "WHERE e.standing = :standing")
     List<Map<String,String>> findMusiciansWithStanding(@Param("standing") String standing);
+
+    Musician save(Musician musician);
 }

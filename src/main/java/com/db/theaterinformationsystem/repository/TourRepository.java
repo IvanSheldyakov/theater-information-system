@@ -17,10 +17,10 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
             "FROM FullName f " +
             "WHERE EXISTS (SELECT 1 FROM Actor a JOIN PlayActor pa ON a = pa.actor " +
             "JOIN Play p ON pa.play = p JOIN Tour t ON p = t.play " +
-            "WHERE a.employee.fullName = f AND t.start > :startDate AND t.end < :endDate) " +
+            "WHERE a.employee.fullName = f AND t.startTour > :startDate AND t.endTour < :endDate) " +
             "OR EXISTS (SELECT 1 FROM Producer pro JOIN Play p ON pro = p.directorProducer OR pro = p.artProducer OR pro = p.conductorProducer " +
             "JOIN Tour t ON p = t.play " +
-            "WHERE pro.employee.fullName = f AND t.start > :startDate AND t.end < :endDate) " +
+            "WHERE pro.employee.fullName = f AND t.startTour > :startDate AND t.endTour < :endDate) " +
             "GROUP BY f.name, f.surname, f.patronymic")
     List<Map<String, String>> findActorsAndProducersInTourByPeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
@@ -28,10 +28,10 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
             "FROM FullName f " +
             "WHERE EXISTS (SELECT 1 FROM Actor a JOIN PlayActor pa ON a = pa.actor " +
             "JOIN Play p ON pa.play = p JOIN Tour t ON p = t.play " +
-            "WHERE a.employee.fullName = f AND t.start = :startDate AND p.id = :playId) " +
+            "WHERE a.employee.fullName = f AND t.startTour = :startDate AND p.id = :playId) " +
             "OR EXISTS (SELECT 1 FROM Producer pro JOIN Play p ON pro = p.directorProducer OR pro = p.artProducer OR pro = p.conductorProducer " +
             "JOIN Tour t ON p = t.play " +
-            "WHERE pro.employee.fullName = f AND t.start = :startDate AND p.id = :playId) " +
+            "WHERE pro.employee.fullName = f AND t.startTour = :startDate AND p.id = :playId) " +
             "GROUP BY f.name, f.surname, f.patronymic")
     List<Map<String, String>> findActorsAndProducersInTourByPlayAndTime(@Param("startDate") LocalDate startDate, @Param("playId") Long playId);
 }

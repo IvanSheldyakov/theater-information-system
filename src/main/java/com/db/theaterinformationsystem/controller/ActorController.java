@@ -1,11 +1,15 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.ActorDTO;
 import com.db.theaterinformationsystem.model.ActorProjection;
 import com.db.theaterinformationsystem.repository.ActorRepository;
+import com.db.theaterinformationsystem.service.ActorService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -15,10 +19,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/actor")
 @RequiredArgsConstructor
-@Tag(name = "актеры")
+@Tag(name = "Актеры")
 public class ActorController {
 
     private final ActorRepository actorRepository;
+    private final ActorService actorService;
 
     @Operation(description = "колличество")
     @GetMapping("/count")
@@ -26,7 +31,7 @@ public class ActorController {
         return actorRepository.count();
     }
 
-    @Operation(description = "число актеров с зарплатой")
+    @Operation(description = "число актеров со стажем")
     @GetMapping("/actors/count/standing")
     public long countActorsWithStanding(@RequestParam("standing") String standing) {
         return actorRepository.countActorsWithStanding(standing);
@@ -38,7 +43,7 @@ public class ActorController {
         return actorRepository.findAllActors();
     }
 
-    @Operation(description = "список актеров с зарплатой")
+    @Operation(description = "список актеров со стажем")
     @GetMapping("/with-standing")
     public List<Map<String, String>> findActorsWithStanding(@RequestParam("standing") String standing) {
         return actorRepository.findActorsWithStanding(standing);
@@ -91,5 +96,33 @@ public class ActorController {
     @GetMapping("/for-role/{roleId}")
     public List<ActorProjection> findActorsForRole(@PathVariable("roleId") Long roleId) {
         return actorRepository.findActorsForRole(roleId);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Long> create(@RequestBody ActorDTO actorDTO) {
+        Long id = actorService.save(actorDTO);
+        return new ResponseEntity<>(id, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<HttpStatus> update(@RequestBody ActorDTO actorDTO) {
+        actorService.save(actorDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/find/by/id")
+    public ActorDTO find(@RequestParam Long id) {
+        return actorService.find(id);
+    }
+
+    @GetMapping("/find/all")
+    public List<ActorDTO> findAll() {
+        return actorService.findAll();
+    }
+
+    @DeleteMapping("/delete/by/id")
+    public ResponseEntity<HttpStatus> delete(@RequestParam Long id) {
+        actorRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,16 +1,15 @@
 package com.db.theaterinformationsystem.model;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.*;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "role", schema = "theatre")
+@Table(schema = "theatre", name = "role")
 public class Role {
 
     @Id
@@ -21,8 +20,8 @@ public class Role {
     @JoinColumn(name = "actor")
     private Actor actor;
 
-    @Column(name = "primary", nullable = false)
-    private Boolean primary;
+    @Column(name = "main", nullable = false)
+    private Boolean main;
 
     @ManyToOne
     @JoinColumn(name = "backup")

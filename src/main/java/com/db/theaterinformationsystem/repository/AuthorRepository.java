@@ -41,4 +41,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             "GROUP BY f.name, f.surname, f.patronymic")
     List<Map<String, String>> findAuthorsByPlayPremierePeriod(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 
+    Author save(Author author);
 }

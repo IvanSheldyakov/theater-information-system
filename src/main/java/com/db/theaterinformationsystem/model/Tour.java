@@ -1,9 +1,9 @@
 package com.db.theaterinformationsystem.model;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -16,11 +16,11 @@ public class Tour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "start", nullable = false)
-    private LocalDate start;
+    @Column(name = "start_tour", nullable = false)
+    private LocalDate startTour;
 
-    @Column(name = "end", nullable = false)
-    private LocalDate end;
+    @Column(name = "end_tour", nullable = false)
+    private LocalDate endTour;
 
     @ManyToOne
     @JoinColumn(name = "play", nullable = false)

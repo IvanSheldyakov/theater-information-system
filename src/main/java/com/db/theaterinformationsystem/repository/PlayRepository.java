@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface PlayRepository extends JpaRepository<Play, Long> {
@@ -50,31 +51,31 @@ public interface PlayRepository extends JpaRepository<Play, Long> {
             "FROM Actor a JOIN PlayActor pa ON a = pa.actor " +
             "JOIN Play p ON pa.play = p JOIN FullName f ON a.employee.fullName = f " +
             "WHERE p.id = :playId")
-    List<Object[]> findActorsByPlayId(@Param("playId") Long playId);
+    List<Map<String, String>> findActorsByPlayId(@Param("playId") Long playId);
 
     @Query("SELECT f.name, f.surname, COALESCE(f.patronymic, '') " +
             "FROM Actor a JOIN Role r ON a = r.backup " +
             "JOIN PlayRole pr ON r = pr.role JOIN Play p ON pr.play = p " +
             "JOIN FullName f ON a.employee.fullName = f " +
             "WHERE p.id = :playId")
-    List<Object[]> findBackupsByPlayId(@Param("playId") Long playId);
+    List<Map<String, String>> findBackupsByPlayId(@Param("playId") Long playId);
 
     @Query("SELECT f.name, f.surname, COALESCE(f.patronymic, '') " +
             "FROM Producer pro JOIN Play p ON pro = p.directorProducer OR pro = p.artProducer OR pro = p.conductorProducer " +
             "JOIN FullName f ON pro.employee.fullName = f " +
             "WHERE p.id = :playId")
-    List<Object[]> findProducersByPlayId(@Param("playId") Long playId);
+    List<Map<String, String>> findProducersByPlayId(@Param("playId") Long playId);
 
     @Query("SELECT f.name, f.surname, COALESCE(f.patronymic, '') " +
             "FROM Author a JOIN Play p ON a = p.author " +
             "JOIN FullName f ON a.fullName = f " +
             "WHERE p.premiere < CURRENT_DATE " +
             "GROUP BY f.name, f.surname, f.patronymic")
-    List<Object[]> findAuthorsWithPastPremieres();
+    List<Map<String, String>> findAuthorsWithPastPremieres();
 
     @Query("SELECT p.premiere FROM Play p WHERE p.id = :playId")
     LocalDate findPremiereDateByPlayId(@Param("playId") Long playId);
 
-
+    Play save(Play play);
 
 }
