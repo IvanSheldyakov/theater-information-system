@@ -15,17 +15,17 @@ import java.io.Serializable;
 public class RoleAttribute {
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "attribute", nullable = false)
     private Attribute attribute;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "value", nullable = false)
     private AttributeValue value;
 

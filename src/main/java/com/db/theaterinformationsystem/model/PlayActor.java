@@ -15,12 +15,12 @@ import java.io.Serializable;
 public class PlayActor {
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "play", nullable = false)
     private Play play;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "actor", nullable = false)
     private Actor actor;
 

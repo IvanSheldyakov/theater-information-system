@@ -22,7 +22,7 @@ public class Tour {
     @Column(name = "end_tour", nullable = false)
     private LocalDate endTour;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "play", nullable = false)
     private Play play;
 

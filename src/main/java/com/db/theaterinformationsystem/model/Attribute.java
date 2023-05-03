@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import jakarta.persistence.*;
 @Table(schema = "theatre", name = "attribute")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Attribute {
 
     @Id
@@ -18,4 +20,7 @@ public class Attribute {
     @Column(name = "attribute", nullable = false, unique = true)
     private String attribute;
 
+    public Attribute(String attribute) {
+        this.attribute = attribute;
+    }
 }

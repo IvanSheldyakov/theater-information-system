@@ -1,8 +1,13 @@
 package com.db.theaterinformationsystem.service;
 
+import com.db.theaterinformationsystem.dto.ActorContestDTO;
 import com.db.theaterinformationsystem.dto.ContestDTO;
 import com.db.theaterinformationsystem.mappers.ContestMapper;
+import com.db.theaterinformationsystem.model.Actor;
+import com.db.theaterinformationsystem.model.ActorContest;
 import com.db.theaterinformationsystem.model.Contest;
+import com.db.theaterinformationsystem.repository.ActorContestRepository;
+import com.db.theaterinformationsystem.repository.ActorRepository;
 import com.db.theaterinformationsystem.repository.ContestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,8 @@ public class ContestService {
 
     private final ContestMapper contestMapper;
     private final ContestRepository contestRepository;
+    private final ActorRepository actorRepository;
+    private final ActorContestRepository actorContestRepository;
 
     @Transactional
     public Long save(ContestDTO dto) {
@@ -31,5 +38,16 @@ public class ContestService {
 
     public List<ContestDTO> findAll() {
         return contestRepository.findAll().stream().map(contestMapper::map).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void addActorToContest(ActorContestDTO dto) {
+        Actor actor = actorRepository.findById(dto.getActorId()).orElseThrow();
+        Contest contest = contestRepository.findById(dto.getContestId()).orElseThrow();
+        ActorContest actorContest = new ActorContest();
+        actorContest.setActor(actor);
+        actorContest.setContest(contest);
+        actorContest.setWinner(dto.getWinner());
+        actorContestRepository.save(actorContest);
     }
 }

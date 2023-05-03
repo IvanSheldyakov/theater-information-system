@@ -1,6 +1,9 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.PlayActorDTO;
 import com.db.theaterinformationsystem.dto.PlayDTO;
+import com.db.theaterinformationsystem.dto.PlayMusicianDTO;
+import com.db.theaterinformationsystem.dto.PlayRoleDTO;
 import com.db.theaterinformationsystem.repository.PlayRepository;
 import com.db.theaterinformationsystem.service.PlayService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -131,6 +134,24 @@ public class PlayController {
     public ResponseEntity<HttpStatus> delete(@RequestParam Long id) {
         playRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/plays/add/actor")
+    public ResponseEntity<HttpStatus> addActor(@RequestBody PlayActorDTO dto) {
+        playService.addActorOnRole(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/plays/add/role")
+    public ResponseEntity<HttpStatus> addRole(@RequestBody PlayRoleDTO dto) {
+        playService.addRole(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/plays/add/musician")
+    public ResponseEntity<HttpStatus> addMusician(@RequestBody PlayMusicianDTO dto) {
+        playService.addMusician(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }

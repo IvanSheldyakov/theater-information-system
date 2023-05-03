@@ -1,11 +1,12 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.EmployeeAttributeDTO;
 import com.db.theaterinformationsystem.repository.EmployeeRepository;
+import com.db.theaterinformationsystem.service.AttributeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
+    private final AttributeService attributeService;
 
     @GetMapping("/employees/sex")
     public List<Map<String, String>> findEmployeesBySex(@RequestParam("sex") String sex) {
@@ -63,5 +65,10 @@ public class EmployeeController {
         return employeeRepository.findEmployeesByStanding(standing);
     }
 
+    @PostMapping("/employees/add/attribute")
+    public ResponseEntity<HttpStatus> addAttribute(@RequestBody EmployeeAttributeDTO dto) {
+        attributeService.addAttribute(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
 }

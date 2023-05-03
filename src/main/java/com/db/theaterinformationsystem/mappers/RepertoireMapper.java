@@ -3,13 +3,11 @@ package com.db.theaterinformationsystem.mappers;
 import com.db.theaterinformationsystem.dto.RepertoireDTO;
 import com.db.theaterinformationsystem.model.Repertoire;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = PlayMapper.class)
 public interface RepertoireMapper {
 
     RepertoireDTO map(Repertoire repertoire);
 
-    @Mapping(target = "play", ignore = true)
     Repertoire map(RepertoireDTO dto);
 }

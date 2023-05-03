@@ -17,12 +17,12 @@ import java.io.Serializable;
 public class PlayRole {
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "play")
     private Play play;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role", nullable = false)
     private Role role;
 

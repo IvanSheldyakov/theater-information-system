@@ -18,7 +18,7 @@ public class Repertoire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "play", nullable = false)
     private Play play;
 

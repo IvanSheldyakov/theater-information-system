@@ -14,7 +14,7 @@ public class Musician {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee", nullable = false, unique = true)
     private Employee employee;
 

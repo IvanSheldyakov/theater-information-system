@@ -26,7 +26,7 @@ public class Ticket {
     @Column(name = "row", nullable = false)
     private Integer row;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "play", nullable = false)
     private Play play;
 

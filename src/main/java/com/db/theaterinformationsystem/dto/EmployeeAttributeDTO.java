@@ -3,9 +3,9 @@ package com.db.theaterinformationsystem.dto;
 import lombok.Data;
 
 @Data
-public class CategoryDTO {
+public class EmployeeAttributeDTO {
 
-    private Long id;
     private String name;
-
+    private String value;
+    private Long employeeId;
 }

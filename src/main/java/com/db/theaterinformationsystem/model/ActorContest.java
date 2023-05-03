@@ -17,12 +17,12 @@ public class ActorContest {
 
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "actor", nullable = false)
     private Actor actor;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "contest", nullable = false)
     private Contest contest;
 

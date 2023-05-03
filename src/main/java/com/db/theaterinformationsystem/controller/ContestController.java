@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.ActorContestDTO;
 import com.db.theaterinformationsystem.dto.ContestDTO;
 import com.db.theaterinformationsystem.repository.ContestRepository;
 import com.db.theaterinformationsystem.service.ContestService;
@@ -46,5 +47,11 @@ public class ContestController {
     public ResponseEntity<HttpStatus> delete(@RequestParam Long id) {
         contestRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/add/actor/to/contest")
+    public ResponseEntity<HttpStatus> addActorToContest(@RequestBody ActorContestDTO dto) {
+        contestService.addActorToContest(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

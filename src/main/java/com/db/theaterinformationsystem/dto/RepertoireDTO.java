@@ -8,4 +8,5 @@ public class RepertoireDTO {
     private Long id;
     private String date;
     private String time;
+    private PlayDTO play;
 }

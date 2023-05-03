@@ -1,8 +1,6 @@
 package com.db.theaterinformationsystem.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -12,20 +10,22 @@ import java.io.Serializable;
 @IdClass(EmployeeAttribute.EmployeeAttributeId.class)
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeAttribute {
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee", nullable = false)
     private Employee employee;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "attribute", nullable = false)
     private Attribute attribute;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "value", nullable = false)
     private AttributeValue value;
 

@@ -1,11 +1,11 @@
 package com.db.theaterinformationsystem.controller;
 
 import com.db.theaterinformationsystem.dto.TourDTO;
+import com.db.theaterinformationsystem.dto.TourPlayDTO;
 import com.db.theaterinformationsystem.repository.TourRepository;
 import com.db.theaterinformationsystem.service.TourService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +63,11 @@ public class TourController {
     public ResponseEntity<HttpStatus> delete(@RequestParam Long id) {
         tourRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/tours/add/play")
+    public ResponseEntity<HttpStatus> addPlay(@RequestBody TourPlayDTO dto) {
+        tourService.addPlay(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

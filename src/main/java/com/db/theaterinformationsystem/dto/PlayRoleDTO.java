@@ -3,9 +3,7 @@ package com.db.theaterinformationsystem.dto;
 import lombok.Data;
 
 @Data
-public class CategoryDTO {
-
-    private Long id;
-    private String name;
-
+public class PlayRoleDTO {
+    private Long play;
+    private Long role;
 }

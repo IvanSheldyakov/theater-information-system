@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import jakarta.persistence.*;
 @Table(schema = "theatre", name = "attribute_value")
 @Getter
 @Setter
+@NoArgsConstructor
 public class AttributeValue {
 
     @Id
@@ -18,9 +20,12 @@ public class AttributeValue {
     @Column(name = "value", nullable = false)
     private String value;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "attribute", nullable = false)
     private Attribute attribute;
 
-
+    public AttributeValue(String value, Attribute attribute) {
+        this.value = value;
+        this.attribute = attribute;
+    }
 }

@@ -16,14 +16,14 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "actor")
     private Actor actor;
 
     @Column(name = "main", nullable = false)
     private Boolean main;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "backup")
     private Actor backup;
 
