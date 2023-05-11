@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.MusicianDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.MusicianMapper;
 import com.db.theaterinformationsystem.model.Musician;
 import com.db.theaterinformationsystem.repository.MusicianRepository;
@@ -27,7 +28,7 @@ public class MusicianService {
     }
 
     public MusicianDTO find(Long id) {
-        return musicianMapper.map(musicianRepository.findById(id).orElse(null));
+        return musicianMapper.map(musicianRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<MusicianDTO> findAll() {

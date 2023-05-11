@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.GenreDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.PlayMapper;
 import com.db.theaterinformationsystem.model.Genre;
 import com.db.theaterinformationsystem.repository.GenreRepository;
@@ -26,7 +27,7 @@ public class GenreService {
     }
 
     public GenreDTO find(Long id) {
-        return genreMapper.map(genreRepository.findById(id).orElse(null));
+        return genreMapper.map(genreRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<GenreDTO> findAll() {

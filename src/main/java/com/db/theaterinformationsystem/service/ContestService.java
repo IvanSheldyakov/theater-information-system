@@ -2,6 +2,7 @@ package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.ActorContestDTO;
 import com.db.theaterinformationsystem.dto.ContestDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.ContestMapper;
 import com.db.theaterinformationsystem.model.Actor;
 import com.db.theaterinformationsystem.model.ActorContest;
@@ -33,7 +34,7 @@ public class ContestService {
     }
 
     public ContestDTO find(Long id) {
-        return contestMapper.map(contestRepository.findById(id).orElse(null));
+        return contestMapper.map(contestRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<ContestDTO> findAll() {
@@ -42,8 +43,8 @@ public class ContestService {
 
     @Transactional
     public void addActorToContest(ActorContestDTO dto) {
-        Actor actor = actorRepository.findById(dto.getActorId()).orElseThrow();
-        Contest contest = contestRepository.findById(dto.getContestId()).orElseThrow();
+        Actor actor = actorRepository.findById(dto.getActorId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Contest contest = contestRepository.findById(dto.getContestId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         ActorContest actorContest = new ActorContest();
         actorContest.setActor(actor);
         actorContest.setContest(contest);

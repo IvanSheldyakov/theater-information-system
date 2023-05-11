@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.AuthorDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.AuthorMapper;
 import com.db.theaterinformationsystem.model.Author;
 import com.db.theaterinformationsystem.repository.AuthorRepository;
@@ -26,7 +27,7 @@ public class AuthorService {
     }
 
     public AuthorDTO find(Long id) {
-        return authorMapper.map(authorRepository.findById(id).orElse(null));
+        return authorMapper.map(authorRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<AuthorDTO> findAll() {

@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.AudienceDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.PlayMapper;
 import com.db.theaterinformationsystem.model.Audience;
 import com.db.theaterinformationsystem.repository.AudienceRepository;
@@ -26,7 +27,7 @@ public class AudienceService {
     }
 
     public AudienceDTO find(Long id) {
-        return audienceMapper.map(audienceRepository.findById(id).orElse(null));
+        return audienceMapper.map(audienceRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<AudienceDTO> findAll() {

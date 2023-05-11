@@ -2,6 +2,7 @@ package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.TourDTO;
 import com.db.theaterinformationsystem.dto.TourPlayDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.TourMapper;
 import com.db.theaterinformationsystem.model.Play;
 import com.db.theaterinformationsystem.model.Tour;
@@ -30,7 +31,7 @@ public class TourService {
     }
 
     public TourDTO find(Long id) {
-        return tourMapper.map(tourRepository.findById(id).orElse(null));
+        return tourMapper.map(tourRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<TourDTO> findAll() {
@@ -39,8 +40,8 @@ public class TourService {
 
     @Transactional
     public void addPlay(TourPlayDTO dto) {
-        Play play = playRepository.findById(dto.getPlayId()).orElseThrow();
-        Tour tour = tourRepository.findById(dto.getTourId()).orElseThrow();
+        Play play = playRepository.findById(dto.getPlayId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Tour tour = tourRepository.findById(dto.getTourId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         tour.setPlay(play);
     }
 }

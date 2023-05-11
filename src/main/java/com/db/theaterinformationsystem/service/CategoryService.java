@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.CategoryDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.CommonMapper;
 import com.db.theaterinformationsystem.model.Category;
 import com.db.theaterinformationsystem.repository.CategoryRepository;
@@ -26,7 +27,7 @@ public class CategoryService {
     }
 
     public CategoryDTO find(Long id) {
-        return categoryMapper.map(categoryRepository.findById(id).orElse(null));
+        return categoryMapper.map(categoryRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<CategoryDTO> findAll() {

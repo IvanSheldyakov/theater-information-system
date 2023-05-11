@@ -2,6 +2,8 @@ package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.EmployeeAttributeDTO;
 import com.db.theaterinformationsystem.dto.RoleAttributeDTO;
+import com.db.theaterinformationsystem.exception.ConflictException;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.model.*;
 import com.db.theaterinformationsystem.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +25,12 @@ public class AttributeService {
 
     @Transactional
     public void addAttribute(EmployeeAttributeDTO dto) {
-        Employee employee = employeeRepository.findById(dto.getEmployeeId()).orElseThrow();
+        Employee employee = employeeRepository.findById(dto.getEmployeeId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Attribute attribute = getAttribute(dto.getName());
         AttributeValue attributeValue = getAttributeValue(dto.getValue(), attribute);
         Optional<EmployeeAttribute> employeeAttributeOptional = employeeAttributeRepository.findByAttributeAndEmployeeAndValue(attribute, employee, attributeValue);
         if (employeeAttributeOptional.isPresent()) {
-            throw new RuntimeException();
+            throw new ConflictException("Уже существует");
         } else {
             employeeAttributeRepository.save(new EmployeeAttribute(employee, attribute, attributeValue));
         }
@@ -36,12 +38,12 @@ public class AttributeService {
 
     @Transactional
     public void addAttribute(RoleAttributeDTO dto) {
-        Role role = roleRepository.findById(dto.getRoleId()).orElseThrow();
+        Role role = roleRepository.findById(dto.getRoleId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Attribute attribute = getAttribute(dto.getName());
         AttributeValue attributeValue = getAttributeValue(dto.getValue(), attribute);
         Optional<RoleAttribute> roleAttributeOptional = roleAttributeRepository.findByAttributeAndRoleAndValue(attribute, role, attributeValue);
         if (roleAttributeOptional.isPresent()) {
-            throw new RuntimeException();
+            throw new ConflictException("Уже существует");
         } else {
             roleAttributeRepository.save(new RoleAttribute(role, attribute, attributeValue));
         }

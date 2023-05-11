@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.ServantDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.ServantMapper;
 import com.db.theaterinformationsystem.model.Servant;
 import com.db.theaterinformationsystem.repository.ServantRepository;
@@ -26,7 +27,7 @@ public class ServantService {
     }
 
     public ServantDTO find(Long id) {
-        return servantMapper.map(servantRepository.findById(id).orElse(null));
+        return servantMapper.map(servantRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<ServantDTO> findAll() {

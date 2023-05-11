@@ -4,6 +4,8 @@ import com.db.theaterinformationsystem.dto.PlayActorDTO;
 import com.db.theaterinformationsystem.dto.PlayDTO;
 import com.db.theaterinformationsystem.dto.PlayMusicianDTO;
 import com.db.theaterinformationsystem.dto.PlayRoleDTO;
+import com.db.theaterinformationsystem.exception.ConflictException;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.PlayMapper;
 import com.db.theaterinformationsystem.model.*;
 import com.db.theaterinformationsystem.repository.*;
@@ -27,7 +29,6 @@ public class PlayService {
     private final MusicianRepository musicianRepository;
     private final PlayMusicianRepository playMusicianRepository;
 
-
     @Transactional
     public Long save(PlayDTO dto) {
         Play play = playMapper.map(dto);
@@ -35,8 +36,9 @@ public class PlayService {
         return newPlay.getId();
     }
 
+
     public PlayDTO find(Long id) {
-        return playMapper.map(playRepository.findById(id).orElse(null));
+        return playMapper.map(playRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<PlayDTO> findAll() {
@@ -45,10 +47,10 @@ public class PlayService {
 
     @Transactional
     public void addActorOnRole(PlayActorDTO dto) {
-        Actor actor = actorRepository.findById(dto.getActorId()).orElseThrow();
-        Play play = playRepository.findById(dto.getPlayId()).orElseThrow();
-        Role role = roleRepository.findById(dto.getRoleId()).orElseThrow();
-        playRoleRepository.findByPlayAndRole(play, role).orElseThrow();
+        Actor actor = actorRepository.findById(dto.getActorId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Play play = playRepository.findById(dto.getPlayId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Role role = roleRepository.findById(dto.getRoleId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        playRoleRepository.findByPlayAndRole(play, role).orElseThrow(() -> new ConflictException("Уже существует"));
         PlayActor playActor = new PlayActor();
         playActor.setActor(actor);
         playActor.setPlay(play);
@@ -62,8 +64,9 @@ public class PlayService {
 
     @Transactional
     public void addRole(PlayRoleDTO dto) {
-        Role role = roleRepository.findById(dto.getRole()).orElseThrow();
-        Play play = playRepository.findById(dto.getPlay()).orElseThrow();
+        Role role = roleRepository.findById(dto.getRole()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Play play = playRepository.findById(dto.getPlay()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        playRoleRepository.findByPlayAndRole(play, role).orElseThrow(() -> new ConflictException("Уже существует"));
         PlayRole playRole = new PlayRole();
         playRole.setPlay(play);
         playRole.setRole(role);
@@ -72,8 +75,9 @@ public class PlayService {
 
     @Transactional
     public void addMusician(PlayMusicianDTO dto) {
-        Musician musician = musicianRepository.findById(dto.getMusicianId()).orElseThrow();
-        Play play = playRepository.findById(dto.getPlayId()).orElseThrow();
+        Musician musician = musicianRepository.findById(dto.getMusicianId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Play play = playRepository.findById(dto.getPlayId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        playMusicianRepository.findByPlayAndMusician(play, musician).orElseThrow(() -> new ConflictException("Уже существует"));
         PlayMusician playMusician = new PlayMusician();
         playMusician.setMusician(musician);
         playMusician.setPlay(play);

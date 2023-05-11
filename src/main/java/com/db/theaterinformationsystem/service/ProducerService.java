@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.ProducerDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.ProducerMapper;
 import com.db.theaterinformationsystem.model.Producer;
 import com.db.theaterinformationsystem.repository.ProducerRepository;
@@ -27,7 +28,7 @@ public class ProducerService {
     }
 
     public ProducerDTO find(Long id) {
-        return producerMapper.map(producerRepository.findById(id).orElse(null));
+        return producerMapper.map(producerRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<ProducerDTO> findAll() {

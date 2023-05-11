@@ -33,4 +33,8 @@ public class Ticket {
     @Column(name = "buy_date")
     private LocalDate buyDate;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "season_ticket_id")
+    private SeasonTicket seasonTicket;
+
 }

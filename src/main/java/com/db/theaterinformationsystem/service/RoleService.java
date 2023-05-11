@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.RoleDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.RoleMapper;
 import com.db.theaterinformationsystem.model.Role;
 import com.db.theaterinformationsystem.repository.RoleRepository;
@@ -26,7 +27,7 @@ public class RoleService {
     }
 
     public RoleDTO find(Long id) {
-        return roleMapper.map(roleRepository.findById(id).orElse(null));
+        return roleMapper.map(roleRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<RoleDTO> findAll() {

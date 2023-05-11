@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.RepertoireDTO;
+import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.RepertoireMapper;
 import com.db.theaterinformationsystem.model.Repertoire;
 import com.db.theaterinformationsystem.repository.RepertoireRepository;
@@ -26,7 +27,7 @@ public class RepertoireService {
     }
 
     public RepertoireDTO find(Long id) {
-        return repertoireMapper.map(repertoireRepository.findById(id).orElse(null));
+        return repertoireMapper.map(repertoireRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
     }
 
     public List<RepertoireDTO> findAll() {
