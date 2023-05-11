@@ -1,14 +1,9 @@
 package com.db.theaterinformationsystem.service;
 
 import com.db.theaterinformationsystem.dto.EmployeeAttributeDTO;
-import com.db.theaterinformationsystem.model.Attribute;
-import com.db.theaterinformationsystem.model.AttributeValue;
-import com.db.theaterinformationsystem.model.Employee;
-import com.db.theaterinformationsystem.model.EmployeeAttribute;
-import com.db.theaterinformationsystem.repository.AttributeRepository;
-import com.db.theaterinformationsystem.repository.AttributeValueRepository;
-import com.db.theaterinformationsystem.repository.EmployeeAttributeRepository;
-import com.db.theaterinformationsystem.repository.EmployeeRepository;
+import com.db.theaterinformationsystem.dto.RoleAttributeDTO;
+import com.db.theaterinformationsystem.model.*;
+import com.db.theaterinformationsystem.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +18,8 @@ public class AttributeService {
     private final EmployeeAttributeRepository employeeAttributeRepository;
     private final AttributeRepository attributeRepository;
     private final AttributeValueRepository attributeValueRepository;
+    private final RoleAttributeRepository roleAttributeRepository;
+    private final RoleRepository roleRepository;
 
     @Transactional
     public void addAttribute(EmployeeAttributeDTO dto) {
@@ -34,6 +31,19 @@ public class AttributeService {
             throw new RuntimeException();
         } else {
             employeeAttributeRepository.save(new EmployeeAttribute(employee, attribute, attributeValue));
+        }
+    }
+
+    @Transactional
+    public void addAttribute(RoleAttributeDTO dto) {
+        Role role = roleRepository.findById(dto.getRoleId()).orElseThrow();
+        Attribute attribute = getAttribute(dto.getName());
+        AttributeValue attributeValue = getAttributeValue(dto.getValue(), attribute);
+        Optional<RoleAttribute> roleAttributeOptional = roleAttributeRepository.findByAttributeAndRoleAndValue(attribute, role, attributeValue);
+        if (roleAttributeOptional.isPresent()) {
+            throw new RuntimeException();
+        } else {
+            roleAttributeRepository.save(new RoleAttribute(role, attribute, attributeValue));
         }
     }
 

@@ -1,7 +1,9 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.RoleAttributeDTO;
 import com.db.theaterinformationsystem.dto.RoleDTO;
 import com.db.theaterinformationsystem.repository.RoleRepository;
+import com.db.theaterinformationsystem.service.AttributeService;
 import com.db.theaterinformationsystem.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -22,6 +24,7 @@ public class RoleController {
 
     private final RoleRepository roleRepository;
     private final RoleService roleService;
+    private final AttributeService attributeService;
 
 
     @GetMapping("/roles/actor")
@@ -88,5 +91,11 @@ public class RoleController {
     public ResponseEntity<HttpStatus> delete(@RequestParam Long id) {
         roleRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/roles/add/attribute")
+    public ResponseEntity<HttpStatus> addAttribute(@RequestBody RoleAttributeDTO dto) {
+        attributeService.addAttribute(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

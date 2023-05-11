@@ -1,8 +1,6 @@
 package com.db.theaterinformationsystem.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -12,6 +10,8 @@ import java.io.Serializable;
 @IdClass(RoleAttribute.RoleAttributeId.class)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class RoleAttribute {
 
     @Id
@@ -38,5 +38,7 @@ public class RoleAttribute {
         private Long value;
 
     }
+
+
 }
 
