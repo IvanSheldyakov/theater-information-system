@@ -25,4 +25,16 @@ public class FullName {
     @Column(name = "patronymic")
     private String patronymic;
 
+    @OneToOne(mappedBy = "fullName")
+    private Employee employee;
+
+    @Override
+    public String toString() {
+        return "FullName{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
+    }
 }

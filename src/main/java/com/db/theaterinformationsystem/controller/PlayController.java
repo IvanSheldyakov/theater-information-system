@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -40,10 +41,8 @@ public class PlayController {
 
     @Operation(description = "список пьес по автору")
     @GetMapping("/plays/author")
-    public List<String> findPlaysByAuthorFullName(@RequestParam("authorName") String authorName,
-                                                  @RequestParam("authorSurname") String authorSurname,
-                                                  @RequestParam("authorPatronymic") String authorPatronymic) {
-        return playRepository.findPlaysByAuthorFullName(authorName, authorSurname, authorPatronymic);
+    public Set<String> findPlaysByAuthor(Long authorId) {
+        return playService.findPlaysByAuthor(authorId);
     }
 
     @Operation(description = "список пьес по стране автора")
@@ -80,26 +79,26 @@ public class PlayController {
 
     @Operation(description = "список актеров пьесы")
     @GetMapping("/plays/actors")
-    public List<Map<String, String>> findActorsByPlayId(@RequestParam("playId") Long playId) {
-        return playRepository.findActorsByPlayId(playId);
+    public List<String> findActorsByPlayId(@RequestParam("playId") Long playId) {
+        return playService.findActorsByPlayId(playId);
     }
 
     @Operation(description = "список дублюров пьесы")
     @GetMapping("/plays/backups")
-    public List<Map<String, String>> findBackupsByPlayId(@RequestParam("playId") Long playId) {
-        return playRepository.findBackupsByPlayId(playId);
+    public List<String> findBackupsByPlayId(@RequestParam("playId") Long playId) {
+        return playService.findBackupsByPlayId(playId);
     }
 
     @Operation(description = "список постановщиков пьесы")
     @GetMapping("/plays/producers")
-    public List<Map<String, String>> findProducersByPlayId(@RequestParam("playId") Long playId) {
-        return playRepository.findProducersByPlayId(playId);
+    public List<String> findProducersByPlayId(@RequestParam("playId") Long playId) {
+        return playService.findProducersByPlayId(playId);
     }
 
     @Operation(description = "список авторов пьес у которых прошла премьера")
     @GetMapping("/plays/authors/past-premieres")
-    public List<Map<String, String>> findAuthorsWithPastPremieres() {
-        return playRepository.findAuthorsWithPastPremieres();
+    public Set<String> findAuthorsWithPastPremieres() {
+        return playService.findAuthorsWithPastPremieres();
     }
 
     @Operation(description = "премьера пьесы")

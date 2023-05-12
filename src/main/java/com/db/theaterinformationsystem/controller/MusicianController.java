@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Period;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class MusicianController {
     @GetMapping("/musicians/count")
     @Operation(description = "кол-во музыкантов со стажем")
     public long countMusiciansWithStanding(@RequestParam("standing") String standing) {
+
         return musicianRepository.countMusiciansWithStanding(standing);
     }
 

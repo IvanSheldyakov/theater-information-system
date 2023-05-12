@@ -25,13 +25,12 @@ public class Employee {
     private FullName fullName;
 
     @Column(columnDefinition = "text not null", name = "standing")
-    @Convert(converter = PeriodToStringConverter.class)
-    private Period standing;
+    private String standing;
 
-    @Column(name = "birth_year", nullable = false)
+    @Column(name = "birth_year", nullable = false, columnDefinition = "integer default 0")
     private Integer birthYear;
 
-    @Column(name = "children", nullable = false)
+    @Column(name = "children", nullable = false, columnDefinition = "bool default false")
     private Boolean children;
 
     @Column(name = "children_number", nullable = false)
@@ -43,6 +42,5 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category")
     private Category category;
-
 
 }

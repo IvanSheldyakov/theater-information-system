@@ -25,4 +25,10 @@ public class Author {
     @Column(name = "country", nullable = false)
     private String country;
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                '}';
+    }
 }

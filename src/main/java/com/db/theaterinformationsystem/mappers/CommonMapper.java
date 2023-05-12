@@ -14,6 +14,7 @@ public interface CommonMapper {
 
     FullNameDTO map(FullName fullName);
 
+    @Mapping(target = "employee", ignore = true)
     FullName map(FullNameDTO dto);
 
     CategoryDTO map(Category category);

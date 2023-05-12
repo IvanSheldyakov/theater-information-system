@@ -13,7 +13,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -82,5 +85,44 @@ public class PlayService {
         playMusician.setMusician(musician);
         playMusician.setPlay(play);
         playMusicianRepository.save(playMusician);
+    }
+
+    public List<String> findProducersByPlayId(Long playId) {
+        Play play = playRepository.findById(playId).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        return List.of(play.getArtProducer().getEmployee().getFullName().toString(),
+                play.getConductorProducer().getEmployee().getFullName().toString(),
+                play.getDirectorProducer().getEmployee().getFullName().toString());
+    }
+
+    public List<String> findBackupsByPlayId(Long playId) {
+        Play play = playRepository.findById(playId).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        List<PlayRole> playRoles = playRoleRepository.findAllByPlay(play);
+        return playRoles.stream()
+                .map(PlayRole::getRole)
+                .map(Role::getBackup)
+                .filter(Objects::nonNull)
+                .map(Actor::toString)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> findActorsByPlayId(Long playId) {
+        Play play = playRepository.findById(playId).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        List<PlayActor> playActors = playActorRepository.findAllByPlay(play);
+        return playActors.stream()
+                .map(PlayActor::getActor)
+                .filter(Objects::nonNull)
+                .map(Actor::toString)
+                .collect(Collectors.toList());
+    }
+
+    public Set<String> findAuthorsWithPastPremieres() {
+        return playRepository.findAll().stream()
+                .filter(play -> play.getPremiere().isBefore(LocalDate.now()))
+                .map(Play::getAuthor).map(Author::toString).collect(Collectors.toSet());
+    }
+
+    public Set<String> findPlaysByAuthor(Long authorId) {
+        return playRepository.findAll().stream().filter(play ->
+                Objects.equals(play.getAuthor().getId(), authorId)).map(Play::toString).collect(Collectors.toSet());
     }
 }

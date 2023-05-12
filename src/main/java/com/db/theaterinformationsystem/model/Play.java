@@ -52,4 +52,10 @@ public class Play {
     @Column(name = "places", nullable = false)
     private Integer places;
 
+    @Override
+    public String toString() {
+        return "Play{" +
+                "id=" + id +
+                '}';
+    }
 }

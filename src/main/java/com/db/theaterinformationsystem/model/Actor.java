@@ -31,4 +31,10 @@ public class Actor {
     @Column(name = "student", nullable = false)
     private Boolean student = Boolean.FALSE;
 
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "id=" + id +
+                '}';
+    }
 }
