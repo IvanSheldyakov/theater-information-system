@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.SeasonTicketDTO;
 import com.db.theaterinformationsystem.dto.TicketDTO;
 import com.db.theaterinformationsystem.repository.TicketRepository;
 import com.db.theaterinformationsystem.service.TicketService;
@@ -72,13 +73,24 @@ public class TicketController {
     }
 
     @PostMapping("/tickets/buy")
-    public ResponseEntity<Long> buy(@RequestParam Long id) {
+    public ResponseEntity<Long> buyTicket(@RequestParam Long id) {
         return new ResponseEntity<>(ticketService.buy(id), HttpStatus.OK);
     }
 
     @GetMapping("/tickets/find/by/play")
     public ResponseEntity<List<TicketDTO>> findAllByPlayId(@RequestParam Long playId) {
         return new ResponseEntity<>(ticketService.findAllByPlayId(playId), HttpStatus.OK);
+    }
+
+    @PostMapping("/tickets/season/ticket/create")
+    public ResponseEntity<Long> create(@RequestBody SeasonTicketDTO dto) {
+        return new ResponseEntity<>(ticketService.create(dto), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/tickets/season/ticket/buy")
+    public ResponseEntity<HttpStatus> buy(@RequestParam Long id) {
+        ticketService.buySeasonTicket(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

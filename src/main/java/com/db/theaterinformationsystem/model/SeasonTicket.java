@@ -1,10 +1,11 @@
 package com.db.theaterinformationsystem.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,12 @@ public class SeasonTicket {
     @JoinColumn(name = "author")
     private Author author;
 
-    @OneToMany(mappedBy = "seasonTicket")
+    @OneToMany(mappedBy = "seasonTicket", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
+
+    @Column(name = "cost", nullable = false)
+    private BigDecimal cost;
+
+    @Column(name = "buy_date")
+    private LocalDate buyDate;
 }
