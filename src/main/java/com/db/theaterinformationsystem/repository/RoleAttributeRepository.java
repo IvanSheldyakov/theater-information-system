@@ -12,4 +12,6 @@ public interface RoleAttributeRepository extends JpaRepository<RoleAttribute, Lo
     RoleAttribute save(RoleAttribute attribute);
 
     Optional<RoleAttribute> findByAttributeAndRoleAndValue(Attribute attribute, Role role, AttributeValue value);
+
+    Optional<RoleAttribute> findByAttributeAndRole(Attribute attribute, Role role);
 }

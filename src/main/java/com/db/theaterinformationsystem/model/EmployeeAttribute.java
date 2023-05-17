@@ -37,6 +37,14 @@ public class EmployeeAttribute {
         private Long value;
 
     }
+
+    @Override
+    public String toString() {
+        return "EmployeeAttribute{" +
+                "attribute=" + attribute.getAttribute() +
+                ", value=" + value.getValue() +
+                '}';
+    }
 }
 
 

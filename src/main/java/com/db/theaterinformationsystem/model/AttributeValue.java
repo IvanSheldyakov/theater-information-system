@@ -28,4 +28,12 @@ public class AttributeValue {
         this.value = value;
         this.attribute = attribute;
     }
+
+    @Override
+    public String toString() {
+        return "AttributeValue{" +
+                "value='" + value + '\'' +
+                ", attribute=" + attribute.getAttribute() +
+                '}';
+    }
 }

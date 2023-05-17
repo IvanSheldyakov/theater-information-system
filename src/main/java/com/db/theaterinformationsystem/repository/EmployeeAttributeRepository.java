@@ -14,5 +14,6 @@ public interface EmployeeAttributeRepository extends JpaRepository<EmployeeAttri
 
     Optional<EmployeeAttribute> findByAttributeAndEmployeeAndValue(Attribute attribute, Employee employee, AttributeValue value);
 
+    Optional<EmployeeAttribute> findByAttributeAndEmployee(Attribute attribute, Employee employee);
     EmployeeAttribute save(EmployeeAttribute attribute);
 }

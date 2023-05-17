@@ -29,9 +29,8 @@ public class TicketService {
 
     @Transactional
     public Long create(TicketDTO dto) {
-        Play play = playRepository.findById(dto.getId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Play play = playRepository.findById(dto.getPlayId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Ticket ticket = new Ticket();
-        ticket.setId(dto.getId());
         ticket.setPlay(play);
         ticket.setCost(dto.getCost());
         ticket.setRow(dto.getRow());

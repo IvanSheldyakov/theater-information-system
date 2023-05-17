@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.ActorCreateDTO;
 import com.db.theaterinformationsystem.dto.ActorDTO;
 import com.db.theaterinformationsystem.model.ActorProjection;
 import com.db.theaterinformationsystem.repository.ActorRepository;
@@ -99,19 +100,19 @@ public class ActorController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Long> create(@RequestBody ActorDTO actorDTO) {
+    public ResponseEntity<Long> create(@RequestBody ActorCreateDTO actorDTO) {
         Long id = actorService.save(actorDTO);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<HttpStatus> update(@RequestBody ActorDTO actorDTO) {
-        actorService.save(actorDTO);
+    public ResponseEntity<HttpStatus> update(@RequestBody ActorCreateDTO actorDTO) {
+        actorService.update(actorDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/find/by/id")
-    public ActorDTO find(@RequestParam Long id) {
+    public ActorCreateDTO find(@RequestParam Long id) {
         return actorService.find(id);
     }
 

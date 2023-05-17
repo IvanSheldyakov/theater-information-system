@@ -53,7 +53,7 @@ public class PlayService {
         Actor actor = actorRepository.findById(dto.getActorId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Play play = playRepository.findById(dto.getPlayId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Role role = roleRepository.findById(dto.getRoleId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
-        playRoleRepository.findByPlayAndRole(play, role).orElseThrow(() -> new ConflictException("Уже существует"));
+        playRoleRepository.findByPlayAndRole(play, role).orElseThrow(() -> new ConflictException("Конфликт"));
         PlayActor playActor = new PlayActor();
         playActor.setActor(actor);
         playActor.setPlay(play);
@@ -69,7 +69,9 @@ public class PlayService {
     public void addRole(PlayRoleDTO dto) {
         Role role = roleRepository.findById(dto.getRole()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Play play = playRepository.findById(dto.getPlay()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
-        playRoleRepository.findByPlayAndRole(play, role).orElseThrow(() -> new ConflictException("Уже существует"));
+        if (playRoleRepository.findByPlayAndRole(play, role).isPresent()) {
+            throw new ConflictException("Уже существует");
+        }
         PlayRole playRole = new PlayRole();
         playRole.setPlay(play);
         playRole.setRole(role);
@@ -80,7 +82,9 @@ public class PlayService {
     public void addMusician(PlayMusicianDTO dto) {
         Musician musician = musicianRepository.findById(dto.getMusicianId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
         Play play = playRepository.findById(dto.getPlayId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
-        playMusicianRepository.findByPlayAndMusician(play, musician).orElseThrow(() -> new ConflictException("Уже существует"));
+        if (playMusicianRepository.findByPlayAndMusician(play, musician).isPresent()) {
+            throw new ConflictException("Уже существует");
+        }
         PlayMusician playMusician = new PlayMusician();
         playMusician.setMusician(musician);
         playMusician.setPlay(play);

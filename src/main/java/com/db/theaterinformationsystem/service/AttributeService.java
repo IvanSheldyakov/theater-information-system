@@ -36,6 +36,14 @@ public class AttributeService {
         }
     }
 
+    public String findAttributeValue(Employee employee, String attributeName) {
+        Attribute attribute = attributeRepository.findByAttribute(attributeName).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        EmployeeAttribute employeeAttribute = employeeAttributeRepository.findByAttributeAndEmployee(attribute, employee).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        return employeeAttribute.getValue().getValue();
+    }
+
+
+
     @Transactional
     public void addAttribute(RoleAttributeDTO dto) {
         Role role = roleRepository.findById(dto.getRoleId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
@@ -47,6 +55,24 @@ public class AttributeService {
         } else {
             roleAttributeRepository.save(new RoleAttribute(role, attribute, attributeValue));
         }
+    }
+
+    @Transactional
+    public void updateAttribute(RoleAttributeDTO dto) {
+        Role role = roleRepository.findById(dto.getRoleId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Attribute attribute = attributeRepository.findByAttribute(dto.getName()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        RoleAttribute roleAttribute = roleAttributeRepository.findByAttributeAndRole(attribute, role).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        roleAttribute.getValue().setValue(dto.getValue());
+
+    }
+
+    @Transactional
+    public void updateAttribute(EmployeeAttributeDTO dto) {
+        Employee employee = employeeRepository.findById(dto.getEmployeeId()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        Attribute attribute = attributeRepository.findByAttribute(dto.getName()).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        EmployeeAttribute employeeAttribute = employeeAttributeRepository.findByAttributeAndEmployee(attribute, employee).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        employeeAttribute.getValue().setValue(dto.getValue());
+
     }
 
     private Attribute getAttribute(String name) {
