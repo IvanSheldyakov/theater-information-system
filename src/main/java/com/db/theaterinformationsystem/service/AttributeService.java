@@ -42,6 +42,43 @@ public class AttributeService {
         return employeeAttribute.getValue().getValue();
     }
 
+    public String findAttributeValue(Role role, String attributeName) {
+        Attribute attribute = attributeRepository.findByAttribute(attributeName).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        RoleAttribute roleAttribute = roleAttributeRepository.findByAttributeAndRole(attribute, role).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        return roleAttribute.getValue().getValue();
+    }
+
+    public void setSexAttribute(Employee employee, String value) {
+        EmployeeAttributeDTO sexAttribute = new EmployeeAttributeDTO();
+        sexAttribute.setEmployeeId(employee.getId());
+        sexAttribute.setName("пол");
+        sexAttribute.setValue(value);
+        addAttribute(sexAttribute);
+    }
+
+    public void setAgeAttribute(Employee employee, String value) {
+        EmployeeAttributeDTO ageAttribute = new EmployeeAttributeDTO();
+        ageAttribute.setEmployeeId(employee.getId());
+        ageAttribute.setName("возраст");
+        ageAttribute.setValue(value);
+        addAttribute(ageAttribute);
+    }
+
+    public void updateSexAttribute(Employee employee, String value) {
+        EmployeeAttributeDTO sexAttribute = new EmployeeAttributeDTO();
+        sexAttribute.setEmployeeId(employee.getId());
+        sexAttribute.setName("пол");
+        sexAttribute.setValue(value);
+        updateAttribute(sexAttribute);
+    }
+
+    public void updateAgeAttribute(Employee employee, String value) {
+        EmployeeAttributeDTO ageAttribute = new EmployeeAttributeDTO();
+        ageAttribute.setEmployeeId(employee.getId());
+        ageAttribute.setName("возраст");
+        ageAttribute.setValue(value);
+        updateAttribute(ageAttribute);
+    }
 
 
     @Transactional
@@ -55,6 +92,22 @@ public class AttributeService {
         } else {
             roleAttributeRepository.save(new RoleAttribute(role, attribute, attributeValue));
         }
+    }
+
+    public void setDesAttribute(Role role, String value) {
+        RoleAttributeDTO desAttribute = new RoleAttributeDTO();
+        desAttribute.setRoleId(role.getId());
+        desAttribute.setName("описание роли");
+        desAttribute.setValue(value);
+        addAttribute(desAttribute);
+    }
+
+    public void updateDesAttribute(Role role, String value) {
+        RoleAttributeDTO desAttribute = new RoleAttributeDTO();
+        desAttribute.setRoleId(role.getId());
+        desAttribute.setName("описание роли");
+        desAttribute.setValue(value);
+        updateAttribute(desAttribute);
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.db.theaterinformationsystem.controller;
 
 import com.db.theaterinformationsystem.dto.RoleAttributeDTO;
+import com.db.theaterinformationsystem.dto.RoleCreateDTO;
 import com.db.theaterinformationsystem.dto.RoleDTO;
 import com.db.theaterinformationsystem.repository.RoleRepository;
 import com.db.theaterinformationsystem.service.AttributeService;
@@ -66,19 +67,19 @@ public class RoleController {
     }
 
     @PostMapping("/roles/create")
-    public ResponseEntity<Long> create(@RequestBody RoleDTO roleDTO) {
+    public ResponseEntity<Long> create(@RequestBody RoleCreateDTO roleDTO) {
         Long id = roleService.save(roleDTO);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PostMapping("/roles/update")
-    public ResponseEntity<HttpStatus> update(@RequestBody RoleDTO roleDTO) {
-        roleService.save(roleDTO);
+    public ResponseEntity<HttpStatus> update(@RequestBody RoleCreateDTO roleDTO) {
+        roleService.update(roleDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/roles/find/by/id")
-    public RoleDTO find(@RequestParam Long id) {
+    public RoleCreateDTO find(@RequestParam Long id) {
         return roleService.find(id);
     }
 

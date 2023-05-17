@@ -5,6 +5,7 @@ import com.db.theaterinformationsystem.dto.TicketDTO;
 import com.db.theaterinformationsystem.repository.TicketRepository;
 import com.db.theaterinformationsystem.service.TicketService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Tag(name = "Билеты")
 public class TicketController {
 
     private final TicketRepository ticketRepository;

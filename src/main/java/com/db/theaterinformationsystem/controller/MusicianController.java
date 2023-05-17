@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.MusicianCreateDTO;
 import com.db.theaterinformationsystem.dto.MusicianDTO;
 import com.db.theaterinformationsystem.repository.MusicianRepository;
 import com.db.theaterinformationsystem.service.MusicianService;
@@ -43,19 +44,19 @@ public class MusicianController {
     }
 
     @PostMapping("/musicians/create")
-    public ResponseEntity<Long> create(@RequestBody MusicianDTO musicianDTO) {
+    public ResponseEntity<Long> create(@RequestBody MusicianCreateDTO musicianDTO) {
         Long id = musicianService.save(musicianDTO);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PostMapping("/musicians/update")
-    public ResponseEntity<HttpStatus> update(@RequestBody MusicianDTO musicianDTO) {
-        musicianService.save(musicianDTO);
+    public ResponseEntity<HttpStatus> update(@RequestBody MusicianCreateDTO musicianDTO) {
+        musicianService.update(musicianDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/musicians/find/by/id")
-    public MusicianDTO find(@RequestParam Long id) {
+    public MusicianCreateDTO find(@RequestParam Long id) {
         return musicianService.find(id);
     }
 

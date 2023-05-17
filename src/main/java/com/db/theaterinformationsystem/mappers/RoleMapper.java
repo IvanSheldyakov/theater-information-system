@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.mappers;
 
+import com.db.theaterinformationsystem.dto.RoleCreateDTO;
 import com.db.theaterinformationsystem.dto.RoleDTO;
 import com.db.theaterinformationsystem.model.Role;
 import org.mapstruct.Mapper;
@@ -13,4 +14,11 @@ public interface RoleMapper {
     @Mapping(target = "actor", ignore = true)
     @Mapping(target = "backup", ignore = true)
     Role map(RoleDTO dto);
+
+    @Mapping(target = "actor", ignore = true)
+    @Mapping(target = "backup", ignore = true)
+    Role map(RoleCreateDTO dto);
+
+    @Mapping(target = "description", ignore = true)
+    RoleCreateDTO mapRole(Role role);
 }

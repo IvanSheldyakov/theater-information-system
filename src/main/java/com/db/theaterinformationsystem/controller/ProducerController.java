@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.ProducerCreateDTO;
 import com.db.theaterinformationsystem.dto.ProducerDTO;
 import com.db.theaterinformationsystem.repository.ProducerRepository;
 import com.db.theaterinformationsystem.service.ProducerService;
@@ -21,19 +22,19 @@ public class ProducerController {
     private final ProducerRepository producerRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<Long> create(@RequestBody ProducerDTO ProducerDTO) {
+    public ResponseEntity<Long> create(@RequestBody ProducerCreateDTO ProducerDTO) {
         Long id = producerService.save(ProducerDTO);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<HttpStatus> update(@RequestBody ProducerDTO ProducerDTO) {
-        producerService.save(ProducerDTO);
+    public ResponseEntity<HttpStatus> update(@RequestBody ProducerCreateDTO ProducerDTO) {
+        producerService.update(ProducerDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/find/by/id")
-    public ProducerDTO find(@RequestParam Long id) {
+    public ProducerCreateDTO find(@RequestParam Long id) {
         return producerService.find(id);
     }
 

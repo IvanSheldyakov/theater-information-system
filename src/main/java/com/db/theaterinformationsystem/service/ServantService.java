@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.service;
 
+import com.db.theaterinformationsystem.dto.ServantCreateDTO;
 import com.db.theaterinformationsystem.dto.ServantDTO;
 import com.db.theaterinformationsystem.exception.ExceptionSupplier;
 import com.db.theaterinformationsystem.mappers.ServantMapper;
@@ -18,16 +19,32 @@ public class ServantService {
 
     private final ServantMapper servantMapper;
     private final ServantRepository servantRepository;
+    private final AttributeService attributeService;
 
     @Transactional
-    public Long save(ServantDTO dto) {
+    public Long save(ServantCreateDTO dto) {
         Servant servant = servantMapper.map(dto);
         Servant newServant = servantRepository.save(servant);
+        attributeService.setSexAttribute(newServant.getEmployee(), dto.getSex());
+        attributeService.setAgeAttribute(newServant.getEmployee(), dto.getAge());
         return newServant.getId();
     }
 
-    public ServantDTO find(Long id) {
-        return servantMapper.map(servantRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND));
+    @Transactional
+    public Long update(ServantCreateDTO dto) {
+        Servant servant = servantMapper.map(dto);
+        Servant newServant = servantRepository.save(servant);
+        attributeService.updateSexAttribute(newServant.getEmployee(), dto.getSex());
+        attributeService.updateAgeAttribute(newServant.getEmployee(), dto.getAge());
+        return newServant.getId();
+    }
+
+    public ServantCreateDTO find(Long id) {
+        Servant servant = servantRepository.findById(id).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
+        ServantCreateDTO dto = servantMapper.mapServant(servant);
+        dto.setAge(attributeService.findAttributeValue(servant.getEmployee(), "возраст"));
+        dto.setSex(attributeService.findAttributeValue(servant.getEmployee(), "пол"));
+        return dto;
     }
 
     public List<ServantDTO> findAll() {

@@ -1,5 +1,6 @@
 package com.db.theaterinformationsystem.controller;
 
+import com.db.theaterinformationsystem.dto.ServantCreateDTO;
 import com.db.theaterinformationsystem.dto.ServantDTO;
 import com.db.theaterinformationsystem.repository.ServantRepository;
 import com.db.theaterinformationsystem.service.ServantService;
@@ -21,19 +22,19 @@ public class ServantController {
     private final ServantRepository servantRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<Long> create(@RequestBody ServantDTO servantDTO) {
+    public ResponseEntity<Long> create(@RequestBody ServantCreateDTO servantDTO) {
         Long id = servantService.save(servantDTO);
         return new ResponseEntity<>(id, HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
-    public ResponseEntity<HttpStatus> update(@RequestBody ServantDTO servantDTO) {
-        servantService.save(servantDTO);
+    public ResponseEntity<HttpStatus> update(@RequestBody ServantCreateDTO servantDTO) {
+        servantService.update(servantDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/find/by/id")
-    public ServantDTO find(@RequestParam Long id) {
+    public ServantCreateDTO find(@RequestParam Long id) {
         return servantService.find(id);
     }
 

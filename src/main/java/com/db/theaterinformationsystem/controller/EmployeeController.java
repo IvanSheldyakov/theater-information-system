@@ -3,6 +3,7 @@ package com.db.theaterinformationsystem.controller;
 import com.db.theaterinformationsystem.dto.EmployeeAttributeDTO;
 import com.db.theaterinformationsystem.repository.EmployeeRepository;
 import com.db.theaterinformationsystem.service.AttributeService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Работники")
 public class EmployeeController {
 
     private final EmployeeRepository employeeRepository;
