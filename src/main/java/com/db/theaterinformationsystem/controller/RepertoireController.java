@@ -23,7 +23,6 @@ public class RepertoireController {
 
     private final RepertoireRepository repertoireRepository;
     private final RepertoireService repertoireService;
-    private final TicketService ticketService;
 
     @GetMapping("/repertoire/count")
     @Operation(description = "Кол-во пьес в репертуаре")
