@@ -75,17 +75,17 @@ public class TicketService {
 
     public Long countAllUnsoldTicketsForPremiers() {
         long allTickets = playRepository.findPremieres().stream().map(Play::getPlaces).reduce(0, Integer::sum);
-        return allTickets - ticketRepository.findTicketsForPremieres().stream().filter(ticket -> ticket.getBuyDate() == null).count();
+        return allTickets - ticketRepository.findTicketsForPremieres().stream().filter(ticket -> ticket.getBuyDate() != null).count();
     }
 
     public Long countUnsoldTicketsForPlay(Long playId) {
         Play play = playRepository.findById(playId).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
-        return play.getPlaces() - ticketRepository.findAllByPlay(play).stream().filter(ticket -> ticket.getBuyDate() == null).count();
+        return play.getPlaces() - ticketRepository.findAllByPlay(play).stream().filter(ticket -> ticket.getBuyDate() != null).count();
     }
 
     public List<Ticket> findUnsoldTicketsForPlay(Long playId) {
         Play play = playRepository.findById(playId).orElseThrow(ExceptionSupplier.DATA_NOT_FOUND);
-        return ticketRepository.findAllByPlay(play).stream().filter(ticket -> ticket.getBuyDate() == null).toList();
+        return ticketRepository.findAllByPlay(play).stream().filter(ticket -> ticket.getBuyDate() != null).toList();
     }
 
     public BigDecimal sumCostByPlayId(Long playId) {
