@@ -3,6 +3,8 @@ package com.db.theaterinformationsystem.controller;
 import com.db.theaterinformationsystem.dto.RepertoireDTO;
 import com.db.theaterinformationsystem.repository.RepertoireRepository;
 import com.db.theaterinformationsystem.service.RepertoireService;
+import com.db.theaterinformationsystem.service.TicketService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,51 +23,37 @@ public class RepertoireController {
 
     private final RepertoireRepository repertoireRepository;
     private final RepertoireService repertoireService;
+    private final TicketService ticketService;
 
     @GetMapping("/repertoire/count")
-    public long countAllRepertoire() {
-        return repertoireRepository.countAllRepertoire();
+    @Operation(description = "Кол-во пьес в репертуаре")
+    public long countAllPlaysInRepertoire() {
+        return repertoireRepository.findAllPlaysInRepertoire().size();
     }
 
+    @Operation(description = "Список пьес в репертуаре")
     @GetMapping("/repertoire/plays")
     public List<String> findAllPlaysInRepertoire() {
         return repertoireRepository.findAllPlaysInRepertoire();
     }
 
+    @Operation(description = "Список поставленных пьес")
     @GetMapping("/repertoire/past-plays")
     public List<String> findPastPlaysInRepertoire() {
         return repertoireRepository.findPastPlaysInRepertoire();
     }
 
+    @Operation(description = "Список пьес по жанру")
     @GetMapping("/repertoire/genre")
     public List<String> findAllPlaysInRepertoireByGenre(@RequestParam("genreName") String genreName) {
         return repertoireRepository.findAllPlaysInRepertoireByGenre(genreName);
     }
 
     @GetMapping("/repertoire/date-range")
+    @Operation(description = "Список пьес в промежутке")
     public List<String> findAllPlaysInRepertoireBetweenDates(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                              @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return repertoireRepository.findAllPlaysInRepertoireBetweenDates(startDate, endDate);
-    }
-
-    @GetMapping("/repertoire/free-seats")
-    public Long countFreeSeatsForAllPlays() {
-        return repertoireRepository.countFreeSeatsForAllPlays();
-    }
-
-    @GetMapping("/repertoire/free-seats/play")
-    public Long countFreeSeatsForSpecificPlay(@RequestParam("playId") Long playId) {
-        return repertoireRepository.countFreeSeatsForSpecificPlay(playId);
-    }
-
-    @GetMapping("/repertoire/sold-tickets-premieres")
-    public Long countSoldTicketsForPremieres() {
-        return repertoireRepository.countSoldTicketsForPremieres();
-    }
-
-    @GetMapping("/repertoire/total-seats-premieres")
-    public Long countTotalSeatsForPremieres() {
-        return repertoireRepository.countTotalSeatsForPremieres();
     }
 
     @PostMapping("/repertoire/create")

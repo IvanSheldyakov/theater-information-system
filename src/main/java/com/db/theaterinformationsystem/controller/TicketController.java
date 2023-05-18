@@ -2,6 +2,7 @@ package com.db.theaterinformationsystem.controller;
 
 import com.db.theaterinformationsystem.dto.SeasonTicketDTO;
 import com.db.theaterinformationsystem.dto.TicketDTO;
+import com.db.theaterinformationsystem.model.Ticket;
 import com.db.theaterinformationsystem.repository.TicketRepository;
 import com.db.theaterinformationsystem.service.TicketService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,7 +27,7 @@ public class TicketController {
     private final TicketService ticketService;
 
     @GetMapping("/tickets/sold/count")
-    @Operation(description = "Все проданные билеты")
+    @Operation(description = "Колличество всех проданных билетов")
     public Long countAllSoldTickets() {
         return ticketService.countAllSoldTickets();
     }
@@ -38,7 +39,7 @@ public class TicketController {
     }
 
     @GetMapping("/tickets/play/count")
-    @Operation(description = "Свободные билеты на спектакль")
+    @Operation(description = "Кол-во свободных билетов на спектакль")
     public Long countTicketsByPlayId(@RequestParam("playId") Long playId) {
         return ticketService.countUnsoldTicketsForPlay(playId);
     }
@@ -67,6 +68,12 @@ public class TicketController {
     public BigDecimal sumCostInPeriod(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                       @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return ticketService.sumCostInPeriod(startDate, endDate);
+    }
+
+    @GetMapping("/tickets/unsold")
+    @Operation(description = "Найти свободные билеты на пьесу")
+    public ResponseEntity<List<Ticket>> findUnsoldTicketsForPlay(@RequestParam Long playId) {
+        return new ResponseEntity<>(ticketService.findUnsoldTicketsForPlay(playId),HttpStatus.OK);
     }
 
     @PostMapping("/tickets/create")

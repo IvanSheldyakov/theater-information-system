@@ -4,6 +4,7 @@ import com.db.theaterinformationsystem.dto.TourDTO;
 import com.db.theaterinformationsystem.dto.TourPlayDTO;
 import com.db.theaterinformationsystem.repository.TourRepository;
 import com.db.theaterinformationsystem.service.TourService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -26,12 +27,14 @@ public class TourController {
 
 
     @GetMapping("/tours/actors-producers/period")
+    @Operation(description = "Список актеров и постановщика в туре за указанный период")
     public List<Map<String, String>> findActorsAndProducersInTourByPeriod(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                                           @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
         return tourRepository.findActorsAndProducersInTourByPeriod(startDate, endDate);
     }
 
     @GetMapping("/tours/actors-producers/play-time")
+    @Operation(description = "Найти актеров и постановщиков в туре по пьесе и времени старта тура")
     public List<Map<String, String>> findActorsAndProducersInTourByPlayAndTime(@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                                                                @RequestParam("playId") Long playId) {
         return tourRepository.findActorsAndProducersInTourByPlayAndTime(startDate, playId);

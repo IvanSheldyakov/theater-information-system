@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface PlayRepository extends JpaRepository<Play, Long> {
@@ -33,9 +32,8 @@ public interface PlayRepository extends JpaRepository<Play, Long> {
     @Query("SELECT p.name FROM Play p WHERE p.premiere < CURRENT_DATE")
     List<String> findAllBeforeCurrentDate();
 
-
-    @Query("SELECT COUNT(p) FROM Play p WHERE p.premiere < CURRENT_DATE")
-    long countAllBeforeCurrentDate();
+    @Query("SELECT p FROM Play p JOIN Repertoire rep ON p = rep.play WHERE p.premiere = rep.date")
+    List<Play> findPremieres();
 
     @Query("SELECT p.name FROM Play p WHERE p.premiere BETWEEN :startDate AND :endDate")
     List<String> findAllBetweenDates(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);

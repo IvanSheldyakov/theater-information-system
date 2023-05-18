@@ -12,10 +12,6 @@ import java.util.List;
 @Repository
 public interface RepertoireRepository extends JpaRepository<Repertoire, Long> {
 
-    // Число спектаклей в репертуаре
-    @Query("SELECT COUNT(r) FROM Repertoire r")
-    long countAllRepertoire();
-
     // Список спектаклей в репертуаре
     @Query("SELECT p.name FROM Repertoire r JOIN r.play p")
     List<String> findAllPlaysInRepertoire();
